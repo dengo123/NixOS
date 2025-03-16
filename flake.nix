@@ -22,7 +22,7 @@
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager-stable, home-manager-unstable, cosmic, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager-stable, home-manager-unstable, cosmic, ghostty, stylix, ... }:
     let
       system = "x86_64-linux";
 
