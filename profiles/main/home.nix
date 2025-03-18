@@ -10,7 +10,7 @@
       ../../user/shell/${userSettings.shell}.nix 
       ../../user/term/${userSettings.term}/${userSettings.term}.nix
   #    ../../user/style/stylix.nix
-      ../../user/editor/neovim/nixvim.nix
+      ../../user/editor/${userSettings.editor}/${userSettings.editor}.nix
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -20,8 +20,8 @@
 
   programs.git = {
     enable = true;
-    userName = "dengo123";
-    userEmail = "deniz060198@hotmail.com";
+    userName = userSettings.username;
+    userEmail = userSettings.email;
     extraConfig = {
       init.defaultBranch = "main";
     };
@@ -63,7 +63,7 @@
   #  /etc/profiles/per-user/dengo123/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "neovim";
+    EDITOR = userSettings.editor;
   };
 
    # Let Home Manager install and manage itself.
