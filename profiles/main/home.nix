@@ -10,6 +10,7 @@
       ../../user/shell/${userSettings.shell}.nix 
       ../../user/term/${userSettings.term}/${userSettings.term}.nix
   #    ../../user/style/stylix.nix
+      ../../user/editor/neovim/nixvim.nix
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
