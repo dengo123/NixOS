@@ -20,6 +20,8 @@
     cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     
     stylix.url = "github:danth/stylix";
+
+    nixvim.url = "github:nix-community/nixvim";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager-stable, home-manager-unstable, cosmic, ghostty, stylix, ... }:
