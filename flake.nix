@@ -24,7 +24,7 @@
     nixvim.url = "github:nix-community/nixvim";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager-stable, home-manager-unstable, cosmic, ghostty, stylix, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager-stable, home-manager-unstable, cosmic, ghostty, stylix, nixvim, ... }:
     let
       system = "x86_64-linux";
 
@@ -75,10 +75,11 @@
           overlays = overlays;
         };
       };
+      
+      pkgs = ( if systemSettings.profile == "main" then pkgs-unstable else pkgs-stable);
 
       # Dynamische Auswahl basierend auf `systemSettings.profile`
       useUnstable = systemSettings.profile == "main";
-      pkgs = if useUnstable then pkgs-unstable else pkgs-stable;
 
       # Automatische Auswahl von Home Manager (stable oder unstable)
       home-manager = if useUnstable then home-manager-unstable else home-manager-stable;
@@ -111,6 +112,7 @@
           inherit pkgs;
           modules = [
             ./profiles/${systemSettings.profile}/home.nix
+	    nixvim.homeManagerModules.nixvim
           ];
           extraSpecialArgs = specialArgs;
         };

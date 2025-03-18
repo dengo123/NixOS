@@ -4,122 +4,32 @@
   programs.nixvim = {
     enable = true;
 
-    # === Editor-Optionen ===
-    opts = {
-      number = true;
-      relativenumber = true;
-      expandtab = true;
-      shiftwidth = 2;
-      tabstop = 2;
-      softtabstop = 2;
-      swapfile = false;
-      termguicolors = true;
-      winblend = 20;
-      pumblend = 20;
-    };
-
-    globals = {
-      mapleader = " ";
-      background = "light";
-    };
-
-    autoCmd = [
-      { event = "ColorScheme"; command = "highlight Normal guibg=NONE ctermbg=NONE"; }
-      { event = "ColorScheme"; command = "highlight NonText guibg=NONE ctermbg=NONE"; }
-      { event = "ColorScheme"; command = "highlight LineNr guibg=NONE"; }
-      { event = "ColorScheme"; command = "highlight Folded guibg=NONE"; }
-      { event = "ColorScheme"; command = "highlight EndOfBuffer guibg=NONE"; }
-    ];
-
-    # === Plugins ===
     plugins = {
-      # Autocompletion & Snippets
       cmp-nvim-lsp.enable = true;
       luasnip.enable = true;
-      cmp-luasnip.enable = true;
       friendly-snippets.enable = true;
-      nvim-cmp = {
-        enable = true;
-        settings = {
-          snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
-          mapping = {
-            "<C-b>" = "cmp.mapping.scroll_docs(-4)";
-            "<C-f>" = "cmp.mapping.scroll_docs(4)";
-            "<C-Space>" = "cmp.mapping.complete()";
-            "<C-e>" = "cmp.mapping.abort()";
-            "<CR>" = "cmp.mapping.confirm({ select = true })";
-          };
-          sources = [
-            { name = "nvim_lsp"; }
-            { name = "luasnip"; }
-            { name = "buffer"; }
-          ];
-        };
-      };
+      cmp.enable = true;  # ✅ nvim-cmp wurde in cmp umbenannt
 
-      # LSP, Mason & Formatierung
-      mason.enable = true;
-      mason-lspconfig.enable = true;
-      nvim-lspconfig = {
+      lsp = {
         enable = true;
         servers = {
-          tsserver.enable = true;
+          ts_ls.enable = true;  # ✅ tsserver wurde in ts_ls umbenannt
           solargraph.enable = true;
           html.enable = true;
-          lua-ls.enable = true;
+          lua_ls.enable = true;  # ✅ lua-ls wurde in lua_ls umbenannt
         };
       };
 
-      none-ls = {
-        enable = true;
-        sources.formatting = {
-          stylua.enable = true;
-          black.enable = true;
-          prettier.enable = true;
-        };
-      };
-
-      # Debugging (DAP)
       dap.enable = true;
       dap-ui.enable = true;
-
-      # Datei-Browser
-      neo-tree = {
-        enable = true;
-        settings = {
-          filesystem = {
-            follow_current_file = true;
-            group_empty_dirs = true;
-            hide_dotfiles = false;
-          };
-        };
-      };
-
-      # Indentation Guides
+      neo-tree.enable = true;
       indent-blankline.enable = true;
+      web-devicons.enable = true;  # ✅ Korrekte Aktivierung von devicons
+      lualine.enable = true;
+      telescope.enable = true;
+      treesitter.enable = true;
 
-      # Icons für UI
-      nvim-web-devicons.enable = true;
-
-      # Statusline
-      lualine = {
-        enable = true;
-        settings.options = {
-          theme = "auto";
-          component_separators = { left = ""; right = ""; };
-          section_separators = { left = ""; right = ""; };
-        };
-      };
-
-      # Fuzzy Finder (Telescope)
-      telescope = {
-        enable = true;
-        extensions = {
-          "ui-select".enable = true;
-        };
-      };
-
-      # Startbildschirm (Alpha-Nvim)
+      # ✅ Alpha-Nvim mit deiner Konfiguration
       alpha = {
         enable = true;
         layout = [
@@ -165,29 +75,89 @@
         ];
       };
 
-      # Syntax-Highlighting (Treesitter)
-      treesitter = {
+      # ✅ Konflikt zwischen ts_ls und prettier gelöst
+      none-ls = {
         enable = true;
-        settings = {
-          auto_install = true;
-          highlight.enable = true;
-          indent.enable = true;
+        sources.formatting = {
+          stylua.enable = true;
+          black.enable = true;
+          prettier = {
+            enable = true;
+            disableTsServerFormatter = true;
+          };
         };
       };
     };
 
-    # === Keybindings ===
-    keymaps = [
-      { mode = "n"; key = "<leader>h"; action = ":nohlsearch<CR>"; }
-      { mode = "n"; key = "<C-h>"; action = ":wincmd h<CR>"; }
-      { mode = "n"; key = "<C-l>"; action = ":wincmd l<CR>"; }
-      { mode = "n"; key = "<C-k>"; action = ":wincmd k<CR>"; }
-      { mode = "n"; key = "<C-j>"; action = ":wincmd j<CR>"; }
-      { mode = "n"; key = "<C-t>"; action = ":tabnew<CR>"; }
-      { mode = "n"; key = "<C-n>"; action = ":tabnext<CR>"; }
-      { mode = "n"; key = "<C-b>"; action = ":tabprevious<CR>"; }
-      { mode = "n"; key = "<C-w>"; action = ":tabclose<CR>"; }
-    ];
+    # 🔹 Extra Lua Konfiguration für nvim-cmp, Neo-Tree & Keybindings
+    extraConfigLua = ''
+      -- Neo-Tree Setup
+      require("neo-tree").setup({
+        filesystem = {
+          follow_current_file = true,
+          group_empty_dirs = true,
+          filtered_items = {
+            hide_dotfiles = false,
+            hide_gitignored = false,
+          },
+        },
+        window = {
+          transparent_panel = true,
+        },
+      })
+
+      -- nvim-cmp Setup
+      local cmp = require("cmp")
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require("luasnip").lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+        }, {
+          { name = "buffer" },
+        }),
+      })
+
+      -- Keybindings
+      vim.keymap.set("n", "<leader>n", ":Neotree filesystem reveal left<CR>", {})
+      vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
+
+      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+
+      vim.keymap.set("n", "<leader>dt", require("dap").toggle_breakpoint, {})
+      vim.keymap.set("n", "<leader>dc", require("dap").continue, {})
+
+      vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", {})
+      vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", {})
+      vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", {})
+      vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", {})
+
+      vim.keymap.set("n", "<C-t>", ":tabnew<CR>", {})
+      vim.keymap.set("n", "<C-n>", ":tabnext<CR>", {})
+      vim.keymap.set("n", "<C-b>", ":tabprevious<CR>", {})
+      vim.keymap.set("n", "<C-w>", ":tabclose<CR>", {})
+
+      vim.keymap.set("n", "<leader>h", ":nohlsearch<CR>", {})
+
+      -- Hintergrundfarben für Neo-Tree
+      vim.cmd("highlight NeoTreeNormal guibg=NONE ctermbg=NONE")
+      vim.cmd("highlight NeoTreeNormalNC guibg=NONE ctermbg=NONE")
+      vim.cmd("highlight NeoTreeEndOfBuffer guibg=NONE ctermbg=NONE")
+      vim.cmd("highlight NeoTreeWinSeparator guibg=NONE ctermbg=NONE")
+    '';
   };
 }
 
