@@ -44,6 +44,7 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".config/nvim/init.lua".source = ./user/editor/neovim/nvim/init.lua;
   };
 
   # Home Manager can also manage your environment variables through
