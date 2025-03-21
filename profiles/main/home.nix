@@ -7,11 +7,14 @@
     else [ ../../../user/wm/${userSettings.wm}/${userSettings.wm}.nix ];
      in wmModule ++ 
     [ 
-      ../../user/shell/${userSettings.shell}.nix 
       ../../user/term/${userSettings.term}/${userSettings.term}.nix
   #    ../../user/style/stylix.nix
-      ../../user/editor/${userSettings.editor}/${userSettings.editor}.nix
-      ../../user/git.nix
+      ../../user/style/rice.nix
+      ../../user/editor/${userSettings.editor}/${userSettings.editor}.nix 
+      ../../user/shell/${userSettings.shell}.nix      
+      ../../user/shell/git.nix
+      ../../user/shell/cli.nix
+      ../../user/shell/dev-tools.nix
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
