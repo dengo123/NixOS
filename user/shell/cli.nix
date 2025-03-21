@@ -17,9 +17,5 @@
     xclip           # system clipboard support
     stow
   ];
-  
-  home.file."config/yazi" = {
-    source = ./../../../config/yazi;
-  };
 }
 
