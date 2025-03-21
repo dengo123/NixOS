@@ -6,7 +6,6 @@
     fd              # Einfacher, schneller Ersatz für 'find'
     fzf             # Fuzzy Finder für interaktive Suchen
     bat             # Verbesserte 'cat'-Version mit Syntax-Highlighting
-    yazi            # CLI-Filemanager
     tmux            # Terminal-Multiplexer
     htop            # Interaktiver Prozess-Manager
     tree            # Verzeichnisstruktur anzeigen
@@ -18,5 +17,9 @@
     xclip           # system clipboard support
     stow
   ];
+  
+  home.file."config/yazi" = {
+    source = ./../../../config/yazi;
+  };
 }
 
