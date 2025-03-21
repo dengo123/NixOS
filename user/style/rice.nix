@@ -11,7 +11,7 @@
     ];
   };
   # Ricing Pakete
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     #Fancies
     fastfetch
     pipes

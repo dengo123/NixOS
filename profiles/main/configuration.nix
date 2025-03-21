@@ -9,7 +9,6 @@
     [
       ./hardware-configuration.nix
       ../../system/${systemSettings.gpuType}.nix
-      ../../system/fonts.nix
       ../../system/shell/${userSettings.shell}.nix
       ../../system/wm/${userSettings.wm}.nix
     ];
