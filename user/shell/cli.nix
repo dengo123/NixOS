@@ -6,8 +6,6 @@
     fd              # Einfacher, schneller Ersatz für 'find'
     fzf             # Fuzzy Finder für interaktive Suchen
     bat             # Verbesserte 'cat'-Version mit Syntax-Highlighting
-    git             # Versionskontrollsystem
-    neovim          # Texteditor
     yazi            # CLI-Filemanager
     tmux            # Terminal-Multiplexer
     htop            # Interaktiver Prozess-Manager
