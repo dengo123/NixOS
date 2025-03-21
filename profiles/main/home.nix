@@ -11,21 +11,13 @@
       ../../user/term/${userSettings.term}/${userSettings.term}.nix
   #    ../../user/style/stylix.nix
       ../../user/editor/${userSettings.editor}/${userSettings.editor}.nix
+      ../../user/git.nix
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = userSettings.username;
   home.homeDirectory = "/home/"+userSettings.username;
-
-  programs.git = {
-    enable = true;
-    userName = userSettings.username;
-    userEmail = userSettings.email;
-    extraConfig = {
-      init.defaultBranch = "main";
-    };
-  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -39,7 +31,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    zem-browser
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
