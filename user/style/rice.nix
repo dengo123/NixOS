@@ -5,7 +5,6 @@
     #Fancies
     fastfetch
     pipes
-    cava
     peaclock
     cbonsai
     asciiquarium-transparent

@@ -1,13 +1,9 @@
 { config, pkgs, lib, userSettings, ... }:
 
 let
-  themeDir = "${config.home.homeDirectory}/.dotfiles/NixOS/themes/${userSettings.theme}";
-  colorsToml = "${themeDir}/colors.toml";
+  themeDir = ../../themes/${userSettings.theme};
+  colors = lib.importTOML "${themeDir}/colors.toml";
   wallpaper = "${themeDir}/background.png";
-
-  base16 = if builtins.pathExists colorsToml
-    then lib.importTOML colorsToml
-    else null;
 in
 {
   stylix = {
@@ -15,25 +11,25 @@ in
 
     image = wallpaper;
 
-    base16Scheme = if base16 != null then {
-      name = base16.scheme;
-      base00 = base16.base00;
-      base01 = base16.base01;
-      base02 = base16.base02;
-      base03 = base16.base03;
-      base04 = base16.base04;
-      base05 = base16.base05;
-      base06 = base16.base06;
-      base07 = base16.base07;
-      base08 = base16.base08;
-      base09 = base16.base09;
-      base0A = base16.base0A;
-      base0B = base16.base0B;
-      base0C = base16.base0C;
-      base0D = base16.base0D;
-      base0E = base16.base0E;
-      base0F = base16.base0F;
-    } else null;
+    base16Scheme = {
+      name = colors.scheme;
+      base00 = colors.base00;
+      base01 = colors.base01;
+      base02 = colors.base02;
+      base03 = colors.base03;
+      base04 = colors.base04;
+      base05 = colors.base05;
+      base06 = colors.base06;
+      base07 = colors.base07;
+      base08 = colors.base08;
+      base09 = colors.base09;
+      base0A = colors.base0A;
+      base0B = colors.base0B;
+      base0C = colors.base0C;
+      base0D = colors.base0D;
+      base0E = colors.base0E;
+      base0F = colors.base0F;
+    };
 
     fonts = {
       monospace = {
@@ -46,7 +42,7 @@ in
       ghostty.enable = true;
       neovim.enable = true;
       yazi.enable = true;
-      gnome.enable = true;
+      gnome.enable = true; # für Cosmic
     };
   };
 }

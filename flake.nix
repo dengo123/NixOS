@@ -42,8 +42,6 @@
       browser = "";
       term = "ghostty";
       shell = "zsh";
-    #  font = "Intel One Mono";
-    #  fontPkg = pkgs.intel-one-mono;
       editor = "nvim";
     };
 
