@@ -10,8 +10,14 @@
     };
 
     ghostty.url = "github:ghostty-org/ghostty";
+    
     cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    stylix.url = "github:danth/stylix";
+    
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
     nixvim.url = "github:nix-community/nixvim";
   };
 
@@ -22,7 +28,7 @@
     # ---- SYSTEM SETTINGS ---- #
     systemSettings = {
       system = system;
-      hostname = "main";
+      hostname = "NixOS";
       profile = "main";
       timezone = "Europe/Berlin";
       locale = "de_DE.UTF-8";
@@ -34,7 +40,6 @@
       username = "dengo123";
       name = "Deniz";
       email = "deniz060198@hotmail.com";
-      dotfilesDir = "~/.dotfiles";
       theme = "everforest";
       font = "JetBrains Mono";
       fontpkg = "jetbrains-mono";

@@ -13,6 +13,7 @@
       ../../system/shell/${userSettings.shell}.nix
       ../../system/wm/${userSettings.wm}.nix
       ../../system/wm/pipewire.nix
+      ../../system/wm/stylix.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

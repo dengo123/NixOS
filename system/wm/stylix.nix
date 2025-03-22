@@ -1,16 +1,17 @@
-{ config, pkgs, lib, userSettings, ... }:
+{ config, pkgs, lib, userSettings, inputs, ... }:
 
 let
-  themeDir = ../themes/${userSettings.theme};
+  inherit (userSettings) theme font fontpkg;
+
+  themeDir = ./. + "/../../themes/${theme}";
   colors = lib.importTOML "${themeDir}/colors.toml";
   wallpaper = "${themeDir}/background.png";
 in
 {
-  imports = [ inputs.stylix.nixosModules.stylix ];  
+  imports = [ inputs.stylix.nixosModules.stylix ];
 
   stylix = {
     enable = true;
-
     image = wallpaper;
 
     base16Scheme = {
@@ -35,17 +36,15 @@ in
 
     fonts = {
       monospace = {
-        package = pkgs.${userSettings.fontpkg};
-        name = userSettings.font;
+        package = pkgs.${fontpkg};
+        name = font;
       };
     };
 
     targets = {
       console.enable = true;
       gtk.enable = true;
-      gnome.enable = true;     # für Cosmic, falls relevant
-      sway.enable = false;     # aktivieren wenn nötig
-      hyprland.enable = false; # aktivieren wenn nötig
+      gnome.enable = true;
     };
   };
 }
