@@ -1,11 +1,10 @@
 { config, pkgs, lib, userSettings, inputs, ... }:
-
 {
   imports = [ inputs.stylix.nixosModules.stylix ];
 
   stylix = {
     enable = true;
-    image = ../../themes/wallpapers/nix_waves.png;
+    image = userSettings.wallpaper;
 
     fonts = {
       monospace = {
