@@ -5,6 +5,7 @@
   stylix = {
     enable = true;
     image = userSettings.wallpaper;
+    polarity = "dark";
 
     fonts = {
       monospace = {
