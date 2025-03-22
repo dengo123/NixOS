@@ -8,7 +8,7 @@
      in wmModule ++ 
     [ 
       ../../user/term/${userSettings.term}/${userSettings.term}.nix
-  #    ../../user/style/stylix.nix
+      ../../user/style/stylix.nix
       ../../user/style/rice.nix
       ../../user/editor/${userSettings.editor}/${userSettings.editor}.nix 
       ../../user/shell/${userSettings.shell}.nix      

@@ -1,74 +1,54 @@
-{ config, lib, pkgs, inputs, userSettings, ... }:
+{ config, lib, pkgs, userSettings, ... }:
 
 let
-  themePath = "../../../themes" + ("/" + userSettings.theme + "/" + userSettings.theme) + ".yaml";
-  theme = builtins.fromYAML (builtins.readFile themePath);
-in {
+  themeDir = "${config.home.homeDirectory}/.dotfiles/NixOS/themes/${userSettings.theme}";
+  colorsYaml = "${themeDir}/colors.yaml";
+  wallpaper = "${themeDir}/background.png";
 
-  imports = [ inputs.stylix.homeManagerModules.stylix ];
+  # Farben aus colors.yaml einlesen
+  base16 = lib.fromYAML (builtins.readFile colorsYaml);
+in
+{
+  stylix = {
+    enable = true;
 
-  config = {
-    home.file.".currenttheme".text = userSettings.theme;
-    stylix.autoEnable = false;
-    stylix.base16Scheme = ./. + themePath;
+    # Setze Wallpaper
+    image = wallpaper;
 
-    # Dynamische Farbgestaltung für Terminals (z.B. WezTerm, Alacritty, etc.)
-    style.terminalColors = {
-      background = theme.background;
-      foreground = theme.foreground;
-      cursor = theme.cursor;
-      ansi = {
-        black   = theme.black;
-        red     = theme.red;
-        green   = theme.green;
-        yellow  = theme.yellow;
-        blue    = theme.blue;
-        magenta = theme.magenta;
-        cyan    = theme.cyan;
-        white   = theme.white;
-      };
-      brights = {
-        black   = theme.bright_black;
-        red     = theme.bright_red;
-        green   = theme.bright_green;
-        yellow  = theme.bright_yellow;
-        blue    = theme.bright_blue;
-        magenta = theme.bright_magenta;
-        cyan    = theme.bright_cyan;
-        white   = theme.bright_white;
-      };
+    # Lade Farben aus der YAML-Datei
+    base16Scheme = {
+      name = base16.scheme;
+      base00 = base16.base00;
+      base01 = base16.base01;
+      base02 = base16.base02;
+      base03 = base16.base03;
+      base04 = base16.base04;
+      base05 = base16.base05;
+      base06 = base16.base06;
+      base07 = base16.base07;
+      base08 = base16.base08;
+      base09 = base16.base09;
+      base0A = base16.base0A;
+      base0B = base16.base0B;
+      base0C = base16.base0C;
+      base0D = base16.base0D;
+      base0E = base16.base0E;
+      base0F = base16.base0F;
     };
 
-    # Font-Konfigurationen
-    stylix.fonts = {
+    # Schriftarten aus Flake definieren
+    fonts = {
       monospace = {
+        package = pkgs.${userSettings.fontpkg};
         name = userSettings.font;
-        package = userSettings.fontPkg;
-      };
-      serif = {
-        name = userSettings.font;
-        package = userSettings.fontPkg;
-      };
-      sansSerif = {
-        name = userSettings.font;
-        package = userSettings.fontPkg;
-      };
-      emoji = {
-        name = "Noto Emoji";
-        package = pkgs.noto-fonts-monochrome-emoji;
-      };
-      sizes = {
-        terminal = 18;
-        applications = 12;
-        popups = 12;
-        desktop = 12;
       };
     };
 
-    fonts.fontconfig.defaultFonts = {
-      monospace = [ userSettings.font ];
-      sansSerif = [ userSettings.font ];
-      serif = [ userSettings.font ];
+    targets = {
+      ghostty.enable = true;
+      neovim.enable = true;
+      yazi.enable = true;
+      gnome.enable = true; # für Cosmic-Desktop
     };
   };
 }
