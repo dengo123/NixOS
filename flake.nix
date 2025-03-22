@@ -36,6 +36,8 @@
       email = "deniz060198@hotmail.com";
       dotfilesDir = "~/.dotfiles";
       theme = "everforest";
+      font = "JetBrains Mono";
+      fontpkg = "jetbrains-mono";
       wm = "cosmic";
       browser = "";
       term = "ghostty";

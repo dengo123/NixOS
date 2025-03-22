@@ -1,22 +1,21 @@
-{ config, lib, pkgs, userSettings, ... }:
+{ config, pkgs, lib, userSettings, ... }:
 
 let
   themeDir = "${config.home.homeDirectory}/.dotfiles/NixOS/themes/${userSettings.theme}";
-  colorsYaml = "${themeDir}/colors.yaml";
+  colorsToml = "${themeDir}/colors.toml";
   wallpaper = "${themeDir}/background.png";
 
-  # Farben aus colors.yaml einlesen
-  base16 = lib.fromYAML (builtins.readFile colorsYaml);
+  base16 = if builtins.pathExists colorsToml
+    then lib.importTOML colorsToml
+    else null;
 in
 {
   stylix = {
     enable = true;
 
-    # Setze Wallpaper
     image = wallpaper;
 
-    # Lade Farben aus der YAML-Datei
-    base16Scheme = {
+    base16Scheme = if base16 != null then {
       name = base16.scheme;
       base00 = base16.base00;
       base01 = base16.base01;
@@ -34,9 +33,8 @@ in
       base0D = base16.base0D;
       base0E = base16.base0E;
       base0F = base16.base0F;
-    };
+    } else null;
 
-    # Schriftarten aus Flake definieren
     fonts = {
       monospace = {
         package = pkgs.${userSettings.fontpkg};
@@ -48,7 +46,7 @@ in
       ghostty.enable = true;
       neovim.enable = true;
       yazi.enable = true;
-      gnome.enable = true; # für Cosmic-Desktop
+      gnome.enable = true;
     };
   };
 }
