@@ -42,7 +42,7 @@
       email = "deniz060198@hotmail.com";
       theme = "everforest";
       font = "JetBrains Mono";
-      fontpkg = "jetbrains-mono";
+      fontpkg = "nerd-fonts.jetbrains-mono";
       wm = "cosmic";
       browser = "";
       term = "ghostty";
