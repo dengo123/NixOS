@@ -16,6 +16,7 @@
     zoxide          # Vergangene Pfad Navigierung
     xclip           # system clipboard support
     stow
+    yazi
   ];
 }
 

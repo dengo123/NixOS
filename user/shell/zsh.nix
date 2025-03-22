@@ -18,8 +18,6 @@ let
     n = "nano";
     e = "emacs";
 
-    fm = "yazi";
-
     cl = "clear";
 
     g = "git";
@@ -51,40 +49,50 @@ let
 
 in  
 {
- programs.zsh = {
-   enable = true;
-   autosuggestion.enable = true;
-   syntaxHighlighting = {
-     enable = true;
-     styles = myStyles;
-   };
-   history = {
-     size = 10000;
-     path = "${config.home.homeDirectory}/zsh_history";
-     share = true;
-     append = true;
-     extended = true;
-     ignoreDups = true;
-     ignoreSpace = true;
-     ignoreAllDups = true;
-   };
-   initExtra = ''
-     eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.dotfiles/config/zsh/themes/omp/everforest.toml)"
-   '';  
-   defaultKeymap = keymap;
-   shellAliases = myAliases;
- };
- programs.oh-my-posh = {
-   enable = true;
-   enableZshIntegration = true;
- };
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting = {
+      enable = true;
+      styles = myStyles;
+    };
+    history = {
+      size = 10000;
+      path = "${config.home.homeDirectory}/zsh_history";
+      share = true;
+      append = true;
+      extended = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+      ignoreAllDups = true;
+    };
+    initExtra = ''
+      function y() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	      yazi "$@" --cwd-file="$tmp"
+	      if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		      builtin cd -- "$cwd"
+	    fi
+	    rm -f -- "$tmp"
+    }
+    eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.dotfiles/config/zsh/themes/omp/everforest.toml)"
 
- programs.fzf = {
-   enable = true;
-   enableZshIntegration = true;
- };
+    '';
+    defaultKeymap = keymap;
+    shellAliases = myAliases;
+  };
 
- home.packages = with pkgs; [
- ];
+  programs.oh-my-posh = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  home.packages = with pkgs; [
+  ];
  
 }
