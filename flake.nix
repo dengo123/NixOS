@@ -41,9 +41,9 @@
       name = "Deniz";
       email = "deniz060198@hotmail.com";
       theme = "everforest";
-      wallpaper = ./themes/wallpapers/nix_waves.png;
-      font = "JetBrains Mono";
-      fontpkg = "nerd-fonts.jetbrains-mono";
+      wallpaper = ./themes/wallpapers/nixos_waves.png;
+      font = "Intel One Mono";
+      fontPkg = pkgs.intel-one-mono;
       wm = "cosmic";
       browser = "";
       term = "ghostty";

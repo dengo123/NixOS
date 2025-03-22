@@ -8,7 +8,7 @@
 
     fonts = {
       monospace = {
-        package = pkgs.${userSettings.fontpkg};
+        package = userSettings.fontPkg;
         name = userSettings.font;
       };
     };
