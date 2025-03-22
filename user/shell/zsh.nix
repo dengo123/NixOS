@@ -94,7 +94,8 @@ in
     enableZshIntegration = true;
   };
 
-  home.packages = with pkgs; [
-  ];
- 
-}
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+} 

@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     ripgrep         # Schnelle Textsuche
     fd              # Einfacher, schneller Ersatz für 'find'
-    fzf             # Fuzzy Finder für interaktive Suchen
     bat             # Verbesserte 'cat'-Version mit Syntax-Highlighting
     tmux            # Terminal-Multiplexer
     htop            # Interaktiver Prozess-Manager
@@ -16,7 +15,6 @@
     zoxide          # Vergangene Pfad Navigierung
     xclip           # system clipboard support
     stow
-    yazi
   ];
 }
 
