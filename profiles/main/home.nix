@@ -15,6 +15,7 @@
       ../../user/shell/git.nix
       ../../user/shell/cli.nix
       ../../user/shell/dev-tools.nix
+      ../../user/app/libreoffice.nix
     ];
 
   # Home Manager needs a bit of information about you and the paths it should

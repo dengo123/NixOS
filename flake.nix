@@ -26,7 +26,6 @@
       profile = "main";
       timezone = "Europe/Berlin";
       locale = "de_DE.UTF-8";
-      grubDevice = "";
       gpuType = "nvidia";
     };
 

@@ -19,6 +19,8 @@ let
     e = "emacs";
 
     cl = "clear";
+    r = "reboot";
+    pw = "poweroff";
 
     g = "git";
     ga = "git add";

@@ -8,18 +8,13 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../system/${systemSettings.gpuType}.nix
+      ../../system/boot/bootloader.nix
+      ../../system/hardware/${systemSettings.gpuType}.nix
       ../../system/shell/${userSettings.shell}.nix
       ../../system/wm/${userSettings.wm}.nix
+      ../../system/wm/pipewire.nix
     ];
 
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = systemSettings.hostname;
@@ -63,30 +58,15 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-    wireplumber.enable = true;
-  };
   
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+
   users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = userSettings.name;
+    description = ${userSettings.name};
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
-    ];
   };
 
   # Install firefox.
@@ -103,7 +83,6 @@
     wget
     coreutils
     git
-    pavucontrol
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
