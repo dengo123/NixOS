@@ -11,7 +11,6 @@
 		jq
     lua5_4
     gcc
-    flake8
     python3
 	];
 }
