@@ -16,6 +16,12 @@
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
+   nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
 
   networking.hostName = systemSettings.hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -65,7 +71,7 @@
 
   users.users.${userSettings.username} = {
     isNormalUser = true;
-    description = ${userSettings.name};
+    description = userSettings.name;
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
