@@ -9,6 +9,7 @@
     [
       ./hardware-configuration.nix
       ../../system/boot/bootloader.nix
+      ../../system/hardware/swap.nix
       ../../system/hardware/${systemSettings.gpuType}.nix
       ../../system/shell/${userSettings.shell}.nix
       ../../system/wm/${userSettings.wm}.nix
