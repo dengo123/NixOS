@@ -22,7 +22,7 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins = {
-      url = "github.hyprwm/hyprland-plugins";
+      url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
   };
@@ -80,6 +80,7 @@
         system = systemSettings.system;
         modules = [
           ./profiles/${systemSettings.profile}/configuration.nix
+          cosmic.nixosModules.default
           {
             nix.settings = {
               substituters = [ "https://cosmic.cachix.org/" ];

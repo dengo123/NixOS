@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-  import = [ cosmic.nixosModules.default ];
   # Enable Cosmic Desktop
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
