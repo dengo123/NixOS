@@ -19,9 +19,15 @@
     };
     
     nixvim.url = "github:nix-community/nixvim";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github.hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, cosmic, ghostty, stylix, nixvim, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, cosmic, ghostty, stylix, nixvim, hyprland, hyprland-plugins, ... }:
   let
     system = "x86_64-linux";
 
@@ -80,7 +86,6 @@
               trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
             };
           }
-          cosmic.nixosModules.default
         ];
         specialArgs = specialArgs;
       };
