@@ -5,14 +5,28 @@
   "SUPER, RETURN, exec, ${userSettings.term}"
   "SUPER, B, exec, ${pkgs.firefox}/bin/firefox"
 
-  # App Launcher (optional: wofi)
+  # App Launcher
   "SUPER, D, exec, ${pkgs.wofi}/bin/wofi --show drun"
 
-  # Fenster-Navigation
-  "SUPER, H, movefocus, l"
-  "SUPER, L, movefocus, r"
-  "SUPER, K, movefocus, u"
-  "SUPER, J, movefocus, d"
+  # Lock & Screenshot
+  "SUPER, L, exec, ${pkgs.swaylock-effects}/bin/swaylock"
+  "SUPER, S, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot.png"
+
+  # Reboot & Poweroff
+  "SUPER SHIFT, R, exec, systemctl reboot"
+  "SUPER SHIFT, P, exec, systemctl poweroff"
+
+  # Fenster-Fokus bewegen (Pfeiltasten statt Vim)
+  "SUPER, LEFT, movefocus, l"
+  "SUPER, RIGHT, movefocus, r"
+  "SUPER, UP, movefocus, u"
+  "SUPER, DOWN, movefocus, d"
+
+  # Fenster verschieben (mit STRG)
+  "SUPER CTRL, LEFT, movewindow, l"
+  "SUPER CTRL, RIGHT, movewindow, r"
+  "SUPER CTRL, UP, movewindow, u"
+  "SUPER CTRL, DOWN, movewindow, d"
 
   # Floating Toggle
   "SUPER, SPACE, togglefloating"
@@ -20,13 +34,7 @@
   # Fenster schließen
   "SUPER, Q, killactive"
 
-  # Lock
-  "SUPER, L, exec, ${pkgs.swaylock-effects}/bin/swaylock"
-
-  # Screenshot
-  "SUPER, S, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot.png"
-
-  # Workspace-Switching (1–10)
+  # Workspaces (1–10)
   "SUPER, 1, workspace, 1"
   "SUPER, 2, workspace, 2"
   "SUPER, 3, workspace, 3"
@@ -38,7 +46,7 @@
   "SUPER, 9, workspace, 9"
   "SUPER, 0, workspace, 10"
 
-  # Move window to workspace
+  # Fenster verschieben zu Workspace (1–10)
   "SUPER SHIFT, 1, movetoworkspace, 1"
   "SUPER SHIFT, 2, movetoworkspace, 2"
   "SUPER SHIFT, 3, movetoworkspace, 3"

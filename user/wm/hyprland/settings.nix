@@ -2,14 +2,14 @@
 
 {
   monitor = [
-    "DP-3, 1920x1080@60, 0x0, 1"
-    "DP-2, 1920x1080@60, 1920x0, 1"
+    "DP-2, 1920x1080@60, 0x0, 1"
+    "DP-3, 1920x1080@60, 1920x0, 1"
   ];
 
   input = {
     kb_layout = "us";
     kb_variant = "";
-    kb_options = "compose:ralt"; # AltGr Compose-Taste
+    kb_options = "compose:ralt";
     follow_mouse = 1;
   };
 
@@ -46,7 +46,6 @@
   };
 
   master.new_is_master = false;
-
   gestures.workspace_swipe = true;
 
   misc = {

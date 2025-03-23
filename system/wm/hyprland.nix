@@ -1,26 +1,23 @@
 { config, pkgs, ... }:
 
 {
-  # Display Manager
-  services.displayManager.sddm.enable = true;
-  services.displayManager.defaultSession = "hyprland";
+  # Display Manager deaktivieren
+  services.displayManager.enable = false;
 
-  # Hyprland systemseitig aktivieren
+  # Autologin über TTY1
+  services.getty.autoLogin.enable = true;
+  services.getty.autoLogin.user = userSettings.username;
+
+  # Hyprland systemweit aktivieren
   programs.hyprland.enable = true;
 
-  # Stylix übernimmt das theming
-  stylix.targets.hyprland.enable = true;
-  stylix.targets.sddm.enable = true;
-
   environment.systemPackages = with pkgs; [
-    sddm
-    xwayland
-    wl-clipboard
-    grim slurp # für Screenshots
-    xdg-desktop-portal-hyprland
+    kitty                          # Fallback-Terminal (wird z. B. für Hyprland-Fehler benötigt)
+    xwayland                       # für XWayland-Kompatibilität
+    wl-clipboard                   # für Copy-Paste in Wayland
+    grim slurp                     # für Screenshots
+    xdg-desktop-portal-hyprland    # Portale für Flatpak etc.
   ];
 
-  # Hostseitig kann zusätzlich folgendes gesetzt werden (optional):
-  security.pam.services.sddm.enableKwallet = true;
 }
 

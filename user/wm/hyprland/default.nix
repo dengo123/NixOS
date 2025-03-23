@@ -13,9 +13,12 @@ in {
     };
   };
 
-  stylix.targets.hyprland.enable = true;
+  programs.bash.profileExtra = ''
+    if [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Hyprland >/dev/null; then
+      exec Hyprland
+    fi
+  '';
 
-  # home.packages für Autostart-Tools
-  inherit (autostart) home.packages;
+  home.packages = with pkgs; [ kitty ] ++ autostart.home.packages;
 }
 
