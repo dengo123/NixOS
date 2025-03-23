@@ -4,7 +4,7 @@
   imports = let
     wmModule = if userSettings.wm == "cosmic"
       then []
-    else [ ../../../user/wm/${userSettings.wm}/${userSettings.wm}.nix ];
+    else [ ../../../user/wm/${userSettings.wm} ];
      in wmModule ++ 
     [ 
       ../../user/term/${userSettings.term}/${userSettings.term}.nix

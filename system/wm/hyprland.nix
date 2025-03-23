@@ -1,20 +1,26 @@
-{ inputs, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
-# Enabling hyprlnd on NixOS
- programs.hyprland = {
-   enable = true;
-   xwayland.enable = true;
-   withUWSM = true;
- };
+  # Display Manager
+  services.displayManager.sddm.enable = true;
+  services.displayManager.defaultSession = "hyprland";
 
- security.pam.services.hyprlock = {};
+  # Hyprland systemseitig aktivieren
+  programs.hyprland.enable = true;
 
- # environment.sessionVariables = {
-   # If your cursor becomes invisible
-   # WLR_NO_HARDWARE_CURSORS = "1";
-   # Hint electron apps to use wayland
-   # NIXOS_OZONE_WL = "1";
- # };
+  # Stylix übernimmt das theming
+  stylix.targets.hyprland.enable = true;
+  stylix.targets.sddm.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    sddm
+    xwayland
+    wl-clipboard
+    grim slurp # für Screenshots
+    xdg-desktop-portal-hyprland
+  ];
+
+  # Hostseitig kann zusätzlich folgendes gesetzt werden (optional):
+  security.pam.services.sddm.enableKwallet = true;
 }
+
