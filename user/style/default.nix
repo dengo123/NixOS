@@ -2,7 +2,7 @@
 
 {
   imports = [
-    stylix-home.nix
-    rice.nix
+    ./stylix-home.nix
+    ./rice.nix
   ];
 }

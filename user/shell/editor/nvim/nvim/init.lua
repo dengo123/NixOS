@@ -1,3 +1,19 @@
+-- Optionen laden
+require("vim-options")
+
+-- Autocmds
+vim.cmd("autocmd! BufReadPost *.cl")
+vim.cmd("autocmd! BufReadPost *.zig")
+vim.cmd("autocmd! BufReadPost *.g")
+
+-- Stylix-Farben laden
+local colors = require("colors")
+
+-- Beispiel-Highlights
+vim.api.nvim_set_hl(0, "Normal", { fg = colors.base05, bg = colors.base00 })
+vim.api.nvim_set_hl(0, "Comment", { fg = colors.base03, italic = true })
+
+-- Lazy.nvim Setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -11,30 +27,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Optionen laden
-require("vim-options")
-
--- Entferne unerwünschte BufReadPost-Autokommandos
-vim.cmd("autocmd! BufReadPost *.cl")
-vim.cmd("autocmd! BufReadPost *.zig")
-vim.cmd("autocmd! BufReadPost *.g")
-
--- Theme-Manager importieren
-local thememanager = require("thememanager")
-
--- Lazy.nvim Setup
 require("lazy").setup({
   lockfile = vim.fn.stdpath("cache") .. "/lazy-lock.json",
-  -- Themes explizit hinzufügen
-  thememanager.load(),
-
-  -- Plugins aus dem Verzeichnis 'plugins' einfügen
   { import = "plugins" },
 })
-
--- Aktives Theme anwenden
-local active_theme = thememanager.active_theme
-if active_theme then
-  vim.cmd.colorscheme(active_theme)
-end
 

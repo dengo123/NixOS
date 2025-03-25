@@ -49,7 +49,7 @@
       theme = "everforest";
       wallpaper = ./themes/wallpapers/nixos_waves.png;
       font = "Intel One Mono";
-      fontPkg = pkgs.intel-one-mono;
+      fontpkg = pkgs.intel-one-mono;
       wm = "cosmic";
       browser = "";
       term = "ghostty";

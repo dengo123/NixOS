@@ -77,8 +77,7 @@ in
 	    fi
 	    rm -f -- "$tmp"
     }
-    eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.dotfiles/config/zsh/themes/omp/everforest.toml)"
-
+      eval "$(oh-my-posh init zsh --config ${config.xdg.configHome}/oh-my-posh/themes/generated.omp.toml)"
     '';
     defaultKeymap = keymap;
     shellAliases = myAliases;
@@ -98,4 +97,7 @@ in
     enable = true;
     enableZshIntegration = true;
   };
+
+  home.file."${config.xdg.configHome}/oh-my-posh/themes/generated.omp.toml" = {
+    source = config.lib.file.mkOutOfStoreSymlink ../../user/style/oh-my-posh/generated.omp.toml; };
 } 

@@ -1,48 +1,51 @@
-{ config, pkgs, lib, userSettings, ... }:
+{ config, pkgs, lib, inputs, userSettings, ... }:
 
 let
-  themeDir = ../../themes/${userSettings.theme};
-  colors = lib.importTOML "${themeDir}/colors.toml";
-  wallpaper = "${themeDir}/background.png";
-in
-{
-  stylix = {
-    enable = true;
+  themeDir = ../../user/style/themes/${userSettings.theme};
+  wallpaperPath = if builtins.pathExists "${themeDir}/background.png"
+    then "${themeDir}/background.png"
+    else ../../user/style/wallpapers/${userSettings.wallpaper};
 
-    image = wallpaper;
+  hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
+  base16 = if hasColorsToml then lib.importTOML "${themeDir}/colors.toml" else config.stylix.colors;
 
-    base16Scheme = {
-      name = colors.scheme;
-      base00 = colors.base00;
-      base01 = colors.base01;
-      base02 = colors.base02;
-      base03 = colors.base03;
-      base04 = colors.base04;
-      base05 = colors.base05;
-      base06 = colors.base06;
-      base07 = colors.base07;
-      base08 = colors.base08;
-      base09 = colors.base09;
-      base0A = colors.base0A;
-      base0B = colors.base0B;
-      base0C = colors.base0C;
-      base0D = colors.base0D;
-      base0E = colors.base0E;
-      base0F = colors.base0F;
-    };
+in {
+  imports = [ "${inputs.stylix}/home-manager/stylix.nix" ];
 
-    fonts = {
-      monospace = {
-        package = userSettings.fontPkg;
+  options.programs.cavalier = lib.mkOption {
+    type = lib.types.attrs;
+    default = {};
+    description = "Stub, um fehlerhaftes Cavalier-Modul zu umgehen";
+  };
+
+  config = {
+    stylix = {
+      enable = true;
+      image = wallpaperPath;
+
+      base16Scheme = lib.mkIf hasColorsToml base16;
+
+      fonts.monospace = {
+        package = userSettings.fontpkg;
         name = userSettings.font;
+      };
+
+      cursor = {
+        name = userSettings.cursor or "Bibata-Modern-Ice";
+        package = pkgs.bibata-cursors;
+        size = 22;
+      };
+
+      targets = {
+        gtk.enable = true;
+        gnome.enable = true;
+        console.enable = true;
       };
     };
 
-    targets = {
-      ghostty.enable = true;
-      neovim.enable = true;
-      yazi.enable = true;
-      gnome.enable = true; # für Cosmic
+    home.file = {
+      "${config.xdg.configHome}/oh-my-posh/themes/generated.omp.toml".text = "...";
+      "${config.xdg.configHome}/nvim/lua/colors.lua".text = "...";
     };
   };
 }
