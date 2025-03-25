@@ -11,7 +11,7 @@ let
 
 in {
   imports = [ "${inputs.stylix}/home-manager/stylix.nix" ];
-
+  
   options.programs.cavalier = lib.mkOption {
     type = lib.types.attrs;
     default = {};
