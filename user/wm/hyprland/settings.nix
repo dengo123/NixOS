@@ -13,6 +13,11 @@
     follow_mouse = 1;
   };
 
+  env = {
+    XCURSOR_THEME = config.stylix.cursor.name;
+    XCURSOR_SIZE = toString config.stylix.cursor.size;
+  };
+
   general = {
     gaps_in = 5;
     gaps_out = 10;
@@ -51,6 +56,7 @@
   misc = {
     disable_hyprland_logo = true;
     disable_splash_rendering = true;
+    force_default_cursor = true;
   };
 }
 

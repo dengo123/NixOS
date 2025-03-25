@@ -1,23 +1,23 @@
 { config, pkgs, ... }:
 
 {
-  # Display Manager deaktivieren
-  services.displayManager.enable = false;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
 
-  # Autologin über TTY1
+  # Auto-Login für deinen User via tty1
   services.getty.autoLogin.enable = true;
-  services.getty.autoLogin.user = userSettings.username;
+  services.getty.autoLogin.user = userSettings.username
 
-  # Hyprland systemweit aktivieren
-  programs.hyprland.enable = true;
+  security.pam.services.hyprlock = {};
 
   environment.systemPackages = with pkgs; [
-    kitty                          # Fallback-Terminal (wird z. B. für Hyprland-Fehler benötigt)
-    xwayland                       # für XWayland-Kompatibilität
-    wl-clipboard                   # für Copy-Paste in Wayland
-    grim slurp                     # für Screenshots
-    xdg-desktop-portal-hyprland    # Portale für Flatpak etc.
+    wl-clipboard
+    kitty
+    grim
+    slurp
+    xdg-desktop-portal-hyprland
   ];
-
 }
 

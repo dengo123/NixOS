@@ -5,11 +5,7 @@
   "SUPER, RETURN, exec, ${userSettings.term}"
   "SUPER, B, exec, ${pkgs.firefox}/bin/firefox"
 
-  # App Launcher
-  "SUPER, D, exec, ${pkgs.wofi}/bin/wofi --show drun"
-
-  # Lock & Screenshot
-  "SUPER, L, exec, ${pkgs.swaylock-effects}/bin/swaylock"
+  # Screenshot
   "SUPER, S, exec, grim -g \"$(slurp)\" ~/Pictures/screenshot.png"
 
   # Reboot & Poweroff

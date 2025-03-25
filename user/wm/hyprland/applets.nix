@@ -1,18 +1,12 @@
-{ pkgs }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
-    waybar
-    dunst
-    hyprpaper
     networkmanagerapplet
     blueman
   ];
 
-  exec-once = [
-    "waybar"
-    "dunst"
-    "hyprpaper"
+  wayland.windowManager.hyprland.settings.exec-once = [
     "nm-applet"
     "blueman-applet"
   ];
