@@ -1,7 +1,7 @@
-{ userSettings ... }@args:
+{ systemSettings, ... }@args:
 {
-  import = [
-    ./${userSettings.gpuType} + ".nix"
+  imports = [
+    ./${systemSettings.gpuType + ".nix"}
     ./bluetooth.nix
     ./swap.nix
   ];

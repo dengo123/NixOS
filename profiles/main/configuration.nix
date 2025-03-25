@@ -12,8 +12,7 @@
       ../../system/hardware
       ../../system/shell/${userSettings.shell}.nix
       ../../system/wm
-      ../../system/services/pipewire.nix
-      ../../system/app/virt-system.nix
+      ../../system/services
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
