@@ -24,7 +24,7 @@
       wallpaper = ./themes/wallpapers/nixos_waves.png;
       font = "Intel One Mono";
       fontPkg = pkgs.intel-one-mono;
-      wm = "hyprland";
+      wm = "cosmic";
       browser = "";
       term = "ghostty";
       shell = "zsh";
