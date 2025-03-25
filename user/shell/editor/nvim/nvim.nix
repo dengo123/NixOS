@@ -3,7 +3,7 @@
 {
   programs.neovim = {
     enable = true;
-    extraLuaConfig = builtins.readFile ../../user/shell/editor/nvim/nvim/init.lua;
+    extraLuaConfig = builtins.readFile ./nvim/init.lua;
   };
 
   home.file."${config.xdg.configHome}/nvim/lua/colors.lua" = {

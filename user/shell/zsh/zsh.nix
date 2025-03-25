@@ -17,7 +17,7 @@ let
     e = "emacs";
     cl = "clear";
     r = "reboot";
-    po = "poweroff";
+    pw = "poweroff";
     g = "git";
     ga = "git add";
     gaa = "git add --all";
@@ -44,14 +44,6 @@ let
     function = "fg=blue";
   };
 
-  # Stylix Template + Farben einlesen
-  ompTemplate = builtins.readFile ../../user/shell/zsh/omp/template.toml;
-  colors = config.stylix.colors;
-  renderTemplate = text: builtins.replaceStrings
-    (map (x: "{{${x}}}") (builtins.attrNames colors))
-    (builtins.attrValues colors)
-    text;
-
 in {
   programs.zsh = {
     enable = true;
@@ -68,7 +60,7 @@ in {
       extended = true;
       ignoreDups = true;
       ignoreSpace = true;
-      ignoreAllDups = false;
+      ignoreAllDups = true;
     };
     initExtra = ''
       function y() {
@@ -79,7 +71,7 @@ in {
         fi
         rm -f -- "$tmp"
       }
-      eval "$(oh-my-posh init zsh --config ${config.xdg.configHome}/oh-my-posh/themes/generated.omp.toml)"
+      eval "$(oh-my-posh init zsh --config /etc/oh-my-posh/generated.omp.toml)"
     '';
     defaultKeymap = keymap;
     shellAliases = myAliases;
@@ -99,9 +91,5 @@ in {
     enable = true;
     enableZshIntegration = true;
   };
-
-  # Dynamisch generierte OMP-Datei aus Stylix-Farben
-  home.file."${config.xdg.configHome}/oh-my-posh/themes/generated.omp.toml".text =
-    renderTemplate ompTemplate;
 }
 
