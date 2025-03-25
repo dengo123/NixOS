@@ -14,7 +14,8 @@
     ffmpeg          # Video Thumbnails für yazi
     zoxide          # Vergangene Pfad Navigierung
     xclip           # system clipboard support
-    stow
+    fzf             # Fuzzy-Finder
+    yazi            # TUI File Manager
   ];
 }
 

@@ -1,0 +1,4 @@
+{ ... }: {
+  programs.zsh.keymap = "emacs";
+}
+

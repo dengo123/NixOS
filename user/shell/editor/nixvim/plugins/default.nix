@@ -9,6 +9,5 @@
   ./telescope.nix
   ./ui.nix
   ./alpha.nix
-  ./window-nav.nix
 ]
 
