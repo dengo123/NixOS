@@ -1,10 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs = {
-    zsh.enable = true;
-    oh-my-posh.enable = true;
-  };
+  programs.zsh.enable = true;
+  programs.oh-my-posh.enable = true;
 
-  imports = import ./plugins
+  imports = import ./plugins;
 }
+

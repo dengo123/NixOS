@@ -1,4 +1,4 @@
 { ... }: {
-  programs.zsh.keymap = "emacs";
+  programs.zsh.defaultKeymap = "emacs";
 }
 
