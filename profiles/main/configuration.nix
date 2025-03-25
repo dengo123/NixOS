@@ -9,10 +9,11 @@
     [
       ./hardware-configuration.nix
       ../../system/boot/bootloader.nix
-      ../../system/hardware/swap.nix
-      ../../system/hardware/${systemSettings.gpuType}.nix
+      ../../system/hardware
       ../../system/shell/${userSettings.shell}.nix
       ../../system/wm
+      ../../system/services/pipewire.nix
+      ../../system/app/virt-system.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
