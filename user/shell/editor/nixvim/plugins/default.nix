@@ -1,4 +1,5 @@
 [
+  ./leader.nix
   ./cmp.nix
   ./dap.nix
   ./lsp.nix

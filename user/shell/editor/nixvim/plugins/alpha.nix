@@ -38,6 +38,7 @@
       }
       {
         type = "group";
+	opts.position = "center";
         val = [
           {
             type = "button";
