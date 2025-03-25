@@ -23,7 +23,7 @@
       theme = "";
       wallpaper = ./themes/wallpapers/nixos_waves.png;
       font = "Intel One Mono";
-      fontpkg = pkgs.intel-one-mono;
+      fontPkg = pkgs.intel-one-mono;
       wm = "hyprland";
       browser = "";
       term = "ghostty";

@@ -10,5 +10,11 @@ in {
       bind = keybindings;
     };
   };
-}
+
+  programs.bash.profileExtra = ''
+    if [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Hyprland >/dev/null; then
+      exec Hyprland
+    fi
+  '';
+} 
 

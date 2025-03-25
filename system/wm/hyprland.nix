@@ -1,14 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, userSettings, ... }:
 
 {
   programs.hyprland = {
     enable = true;
     withUWSM = true;
   };
-
-  # Auto-Login für deinen User via tty1
-  services.getty.autoLogin.enable = true;
-  services.getty.autoLogin.user = userSettings.username;
 
   security.pam.services.hyprlock = {};
 

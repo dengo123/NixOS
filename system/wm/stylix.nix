@@ -1,82 +1,76 @@
 { config, pkgs, lib, userSettings, inputs, ... }:
 
 let
-  # Theme-Verzeichnis
   themeDir = ../../themes/${userSettings.theme};
+  hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
+  colorsToml = if hasColorsToml then lib.importTOML "${themeDir}/colors.toml" else null;
+
   wallpaperPath =
     if builtins.pathExists "${themeDir}/background.png"
     then "${themeDir}/background.png"
-    else ../../wallpapers/${userSettings.wallpaper};
+    else userSettings.wallpaper;
 
-  hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
-  base16 = if hasColorsToml
-    then lib.importTOML "${themeDir}/colors.toml"
-    else config.stylix.colors;
-
-  # oh-my-posh template laden und mit Stylix-Farben ersetzen
   ompTemplate = builtins.readFile ../../user/shell/zsh/omp/template.toml;
-  renderTemplate = text:
-    builtins.replaceStrings
-      (map (x: "{{${x}}}") (builtins.attrNames base16))
-      (builtins.attrValues base16)
-      text;
-
-  # Neovim-Farbwerte als Lua-Datei rendern
-  colorsLua = ''
-    return {
-      base00 = "${base16.base00}",
-      base01 = "${base16.base01}",
-      base02 = "${base16.base02}",
-      base03 = "${base16.base03}",
-      base04 = "${base16.base04}",
-      base05 = "${base16.base05}",
-      base06 = "${base16.base06}",
-      base07 = "${base16.base07}",
-      base08 = "${base16.base08}",
-      base09 = "${base16.base09}",
-      base0A = "${base16.base0A}",
-      base0B = "${base16.base0B}",
-      base0C = "${base16.base0C}",
-      base0D = "${base16.base0D}",
-      base0E = "${base16.base0E}",
-      base0F = "${base16.base0F}",
-    }
-  '';
 
 in {
   imports = [ inputs.stylix.nixosModules.stylix ];
 
-  stylix = {
-    enable = true;
-    image = wallpaperPath;
-    polarity = "dark";
+  config = lib.mkMerge [
+    {
+      stylix = {
+        enable = true;
+        image = wallpaperPath;
+        polarity = "dark";
 
-    base16Scheme = lib.mkIf hasColorsToml base16;
+        base16Scheme = lib.mkIf hasColorsToml colorsToml;
 
-    fonts.monospace = {
-      package = userSettings.fontpkg;
-      name = userSettings.font;
-    };
+        fonts.monospace = {
+          package = userSettings.fontPkg;
+          name = userSettings.font;
+        };
 
-    cursor = {
-      name = userSettings.cursor or "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
-      size = 22;
-    };
+        cursor = {
+          name = userSettings.cursor or "Bibata-Modern-Ice";
+          package = pkgs.bibata-cursors;
+          size = 22;
+        };
 
-    targets = {
-      console.enable = true;
-      gtk.enable = true;
-      gnome.enable = true;
-    };
+        targets = {
+          console.enable = true;
+          gtk.enable = true;
+          gnome.enable = true;
+        };
 
-    enableReleaseChecks = false;
-  };
+        enableReleaseChecks = false;
+      };
+    }
 
-  # Dateien unter /etc bereitstellen
-  environment.etc = {
-    "oh-my-posh/generated.omp.toml".text = renderTemplate ompTemplate;
-    "nvim/colors.lua".text = colorsLua;
-  };
+    (lib.mkIf (config ? stylix.colors) {
+      environment.etc = let
+        sourceColors =
+          if hasColorsToml then colorsToml else config.stylix.colors;
+
+        renderTemplate = text:
+          builtins.replaceStrings
+            (map (x: "{{${x}}}") (builtins.attrNames sourceColors))
+            (builtins.attrValues sourceColors)
+            text;
+
+        colorsLua = ''
+          return {
+            base00 = "${sourceColors.base00}", base01 = "${sourceColors.base01}", base02 = "${sourceColors.base02}",
+            base03 = "${sourceColors.base03}", base04 = "${sourceColors.base04}", base05 = "${sourceColors.base05}",
+            base06 = "${sourceColors.base06}", base07 = "${sourceColors.base07}", base08 = "${sourceColors.base08}",
+            base09 = "${sourceColors.base09}", base0A = "${sourceColors.base0A}", base0B = "${sourceColors.base0B}",
+            base0C = "${sourceColors.base0C}", base0D = "${sourceColors.base0D}", base0E = "${sourceColors.base0E}",
+            base0F = "${sourceColors.base0F}",
+          }
+        '';
+      in {
+        "oh-my-posh/generated.omp.toml".text = renderTemplate ompTemplate;
+        "nvim/colors.lua".text = colorsLua;
+      };
+    })
+  ];
 }
 
