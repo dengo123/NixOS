@@ -1,13 +1,15 @@
-{ config, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   programs.nixvim.plugins.alpha = {
     enable = true;
+
     layout = [
       {
         type = "padding";
-        val = 2;
+        val = 4;
       }
+
       {
         type = "text";
         opts = {
@@ -15,72 +17,89 @@
           position = "center";
         };
         val = [
-        "                                                                       "
-        "                                                                       "
-        "                                                                       "
-        "                                                                       "
-        "                                                                     "
-        "       ████ ██████           █████      ██                     "
-        "      ███████████             █████                             "
-        "      █████████ ███████████████████ ███   ███████████   "
-        "     █████████  ███    █████████████ █████ ██████████████   "
-        "    █████████ ██████████ █████████ █████ █████ ████ █████   "
-        "  ███████████ ███    ███ █████████ █████ █████ ████ █████  "
-        " ██████  █████████████████████ ████ █████ █████ ████ ██████ "
-        "                                                                       "
-        "                                                                       "
-        "                                                                       "
-	];
+          "███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
+          "████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
+          "██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
+          "██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
+          "██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
+          "╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
+        ];
       }
+
       {
         type = "padding";
-        val = 2;
+        val = 8;
       }
+
       {
         type = "group";
-	opts.position = "center";
         val = [
           {
             type = "button";
-            val = "  New file";
-            opts.shortcut = "n";
-            on_press.__raw = "function() vim.cmd[[ene]] end";
+            val = "     New file   ";
+            opts = {
+              position = "center";
+              shortcut = "n";
+              keymap = [ "n" "n" ":ene | startinsert<CR>" ];
+            };
           }
+          { type = "padding"; val = 1; }
+
           {
             type = "button";
-            val = "󰮗  Find file";
-            opts.shortcut = "f";
-            on_press.__raw = "function() vim.cmd[[Telescope find_files]] end";
+            val = "󰮗     Find file  ";
+            opts = {
+              position = "center";
+              shortcut = "f";
+              keymap = [ "n" "f" ":Telescope find_files<CR>" ];
+            };
           }
+          { type = "padding"; val = 1; }
+
           {
             type = "button";
-            val = "󰄉  Recent";
-            opts.shortcut = "r";
-            on_press.__raw = "function() vim.cmd[[Telescope oldfiles]] end";
+            val = "󰄉     Recent     ";
+            opts = {
+              position = "center";
+              shortcut = "r";
+              keymap = [ "n" "r" ":Telescope oldfiles<CR>" ];
+            };
           }
+          { type = "padding"; val = 1; }
+
           {
             type = "button";
-            val = "󰿅 Quit Neovim";
-            opts.shortcut = "q";
-            on_press.__raw = "function() vim.cmd[[qa]] end";
+            val = "     Quit       ";
+            opts = {
+              position = "center";
+              shortcut = "q";
+              keymap = [ "n" "q" ":qa<CR>" ];
+            };
           }
         ];
       }
+
       {
         type = "padding";
-        val = 2;
+        val = 8;
       }
+
       {
         type = "text";
         opts = {
-          hl = "Keyword";
+          hl = "Comment";
           position = "center";
         };
         val = [
-        "┳┓┓┏  ┏┳┓┓┏┏┓  ┓ ┏┏┓┓┏"
-        "┣┫┗┫   ┃ ┣┫┣   ┃┃┃┣┫┗┫"
-        "┻┛┗┛   ┻ ┛┗┗┛  ┗┻┛┛┗┗┛"	
-	];
+          "┳┓┓┏  ┏┳┓┓┏┏┓  ┓ ┏┏┓┓┏"
+          "┣┫┗┫   ┃ ┣┫┣   ┃┃┃┣┫┗┫"
+          "┻┛┗┛   ┻ ┛┗┗┛  ┗┻┛┛┗┗┛"
+        ];
+      }
+
+      {
+        type = "padding";
+        val = 4;
       }
     ];
   };
