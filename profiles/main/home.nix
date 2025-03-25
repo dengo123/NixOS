@@ -4,19 +4,13 @@
   imports = let
     wmModule = if userSettings.wm == "cosmic"
       then []
-    else [ ../../../user/wm/${userSettings.wm} ];
+    else [ ../../user/wm/${userSettings.wm} ];
      in wmModule ++ 
     [ 
-      ../../user/term/${userSettings.term}/${userSettings.term}.nix
     #  ../../user/style/stylix.nix
       ../../user/style/rice.nix
-      ../../user/editor/${userSettings.editor}/${userSettings.editor}.nix 
-      ../../user/shell/${userSettings.shell}.nix      
-      ../../user/shell/git.nix
-      ../../user/shell/cli.nix
-      ../../user/shell/dev-tools.nix
-      ../../user/app/libreoffice.nix
-      ../../user/app/virt-home.nix
+      ../../user/shell      
+      ../../user/app
     ];
 
   # Home Manager needs a bit of information about you and the paths it should

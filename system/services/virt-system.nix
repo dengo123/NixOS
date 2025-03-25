@@ -20,8 +20,6 @@
     };
   };
 
-  services.libvirtd.enable = true;
-
   users.users.${userSettings.username}.extraGroups = [ "libvirtd" "kvm" ];
 
   environment.systemPackages = with pkgs; [

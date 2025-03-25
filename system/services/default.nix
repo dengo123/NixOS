@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    pipewire.nix
-    virt-system.nix
+    ./pipewire.nix
+    ./virt-system.nix
   ];
 }
