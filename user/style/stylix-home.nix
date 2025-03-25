@@ -10,7 +10,7 @@ let
   base16 = if hasColorsToml then lib.importTOML "${themeDir}/colors.toml" else config.stylix.colors;
 
 in {
-  imports = [ "${inputs.stylix}/home-manager/stylix.nix" ];
+  imports = [ inputs.stylix.homeManagerModules.stylix ];
   
   options.programs.cavalier = lib.mkOption {
     type = lib.types.attrs;

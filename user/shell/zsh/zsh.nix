@@ -1,9 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+
 let
-  # Choose keymap "emacs", "vicmd", "viins"
   keymap = "emacs";
 
-  # My aliases
   myAliases = {
     ll = "ls -lah";
     ".." = "cd ..";
@@ -12,16 +11,13 @@ let
     grep = "grep --color=auto";
     upgrade = "sudo nix flake update --flake ~/.dotfiles/NixOS && sudo nixos-rebuild switch --flake ~/.dotfiles/NixOS#system";
     update = "sudo nixos-rebuild switch --flake ~/.dotfiles/NixOS#system";
-    switch = " home-manager switch --flake ~/.dotfiles/NixOS#user";
-
+    switch = "home-manager switch --flake ~/.dotfiles/NixOS#user";
     v = "nvim";
     n = "nano";
     e = "emacs";
-
     cl = "clear";
     r = "reboot";
-    pw = "poweroff";
-
+    po = "poweroff";
     g = "git";
     ga = "git add";
     gaa = "git add --all";
@@ -30,27 +26,33 @@ let
     gc = "git commit";
     gcam = "git commit -a -m";
   };
-  
-  # Highlighter styles
+
   myStyles = {
     comment = "fg=grey";
     command = "fg=green";
     unknown-command = "fg=red";
     option = "fg=cyan";
     argument = "fg=yellow";
-    path = "fg=blue";           
+    path = "fg=blue";
     alias = "fg=magenta";
-    single-quoted-argument ="fg=orange";
-    double-quoted-argument ="fg=orange";
+    single-quoted-argument = "fg=orange";
+    double-quoted-argument = "fg=orange";
     backticks = "fg=cyan";
     globbing = "fg=yellow";
     history-expansion = "fg=red";
-    reserved-word = "fg=white"; 
+    reserved-word = "fg=white";
     function = "fg=blue";
   };
 
-in  
-{
+  # Stylix Template + Farben einlesen
+  ompTemplate = builtins.readFile ../../user/shell/zsh/omp/template.toml;
+  colors = config.stylix.colors;
+  renderTemplate = text: builtins.replaceStrings
+    (map (x: "{{${x}}}") (builtins.attrNames colors))
+    (builtins.attrValues colors)
+    text;
+
+in {
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -66,17 +68,17 @@ in
       extended = true;
       ignoreDups = true;
       ignoreSpace = true;
-      ignoreAllDups = true;
+      ignoreAllDups = false;
     };
     initExtra = ''
       function y() {
         local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	      yazi "$@" --cwd-file="$tmp"
-	      if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		      builtin cd -- "$cwd"
-	    fi
-	    rm -f -- "$tmp"
-    }
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+          builtin cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
+      }
       eval "$(oh-my-posh init zsh --config ${config.xdg.configHome}/oh-my-posh/themes/generated.omp.toml)"
     '';
     defaultKeymap = keymap;
@@ -98,6 +100,8 @@ in
     enableZshIntegration = true;
   };
 
-  home.file."${config.xdg.configHome}/oh-my-posh/themes/generated.omp.toml" = {
-    source = config.lib.file.mkOutOfStoreSymlink ../../user/style/oh-my-posh/generated.omp.toml; };
-} 
+  # Dynamisch generierte OMP-Datei aus Stylix-Farben
+  home.file."${config.xdg.configHome}/oh-my-posh/themes/generated.omp.toml".text =
+    renderTemplate ompTemplate;
+}
+

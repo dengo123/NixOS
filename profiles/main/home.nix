@@ -7,7 +7,6 @@
     else [ ../../user/wm/${userSettings.wm} ];
      in wmModule ++ 
     [ 
-      ../../user/style
       ../../user/shell      
       ../../user/app
     ];
