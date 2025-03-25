@@ -3,6 +3,7 @@
 {
   imports = [
     ./stylix-home.nix
-    ./rice.nix
+    ./applets.nix
+    ./${userSettings.wm}
   ];
 }

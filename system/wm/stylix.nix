@@ -5,14 +5,14 @@ let
   wallpaperPath =
     if builtins.pathExists "${themeDir}/background.png"
     then "${themeDir}/background.png"
-    else ../../themes/wallpapers/${userSettings.wallpaper}.png;
+    else ../../themes/wallpapers/${userSettings.wallpaper};
 
   hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
   base16 = if hasColorsToml
     then lib.importTOML "${themeDir}/colors.toml"
     else config.stylix.colors;
-
-in {
+in
+{
   imports = [ inputs.stylix.nixosModules.stylix ];
 
   stylix = {
@@ -41,5 +41,10 @@ in {
 
     enableReleaseChecks = false;
   };
+
+  environment.etc."stylix/colors.toml".text =
+    if hasColorsToml
+    then builtins.readFile "${themeDir}/colors.toml"
+    else lib.generators.toTOML {} base16;
 }
 
