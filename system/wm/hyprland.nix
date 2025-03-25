@@ -8,7 +8,7 @@
 
   # Auto-Login für deinen User via tty1
   services.getty.autoLogin.enable = true;
-  services.getty.autoLogin.user = userSettings.username
+  services.getty.autoLogin.user = userSettings.username;
 
   security.pam.services.hyprlock = {};
 

@@ -1,32 +1,6 @@
 {
   description = "The Ultimate Flake";
 
-  inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.11";
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ghostty.url = "github:ghostty-org/ghostty";
-    
-    cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    
-    nixvim.url = "github:nix-community/nixvim";
-
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-  };
-
   outputs = inputs@{ self, nixpkgs, home-manager, cosmic, ghostty, stylix, nixvim, hyprland, hyprland-plugins, ... }:
   let
     system = "x86_64-linux";
@@ -46,11 +20,11 @@
       username = "dengo123";
       name = "Deniz";
       email = "deniz060198@hotmail.com";
-      theme = "everforest";
+      theme = "";
       wallpaper = ./themes/wallpapers/nixos_waves.png;
       font = "Intel One Mono";
       fontpkg = pkgs.intel-one-mono;
-      wm = "cosmic";
+      wm = "hyprland";
       browser = "";
       term = "ghostty";
       shell = "zsh";
@@ -103,5 +77,32 @@
       };
     };
   };
+
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-24.11";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ghostty.url = "github:ghostty-org/ghostty";
+    
+    cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    nixvim.url = "github:nix-community/nixvim";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+  };
+
 }
 
