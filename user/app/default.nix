@@ -1,8 +1,9 @@
-{ userSettings }@args:
+{ config, pkgs, lib, inputs, userSettings, ... }:
+
 {
   imports = [
     ./libreoffice.nix
     ./virt-home.nix
-    ./term/${userSettings.term + ".nix"}
+    ./term/${userSettings.term}/${userSettings.term + ".nix"}
   ];
 }
