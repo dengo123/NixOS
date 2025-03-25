@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.nixvim.enable = true;
+  programs.nixvim = {
+    enable = true;
+    stylix.enable = true;
+  };
   imports = import ./plugins;
 }

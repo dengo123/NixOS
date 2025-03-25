@@ -1,5 +1,5 @@
 [
-  ./leader.nix
+  ./vim-options.nix
   ./cmp.nix
   ./dap.nix
   ./lsp.nix
