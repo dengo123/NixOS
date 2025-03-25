@@ -1,67 +1,87 @@
 { config, ... }:
-     programs.nixvim.plugins.alpha = {
-        enable = true;
-	  layout = [
+
+{
+  programs.nixvim.plugins.alpha = {
+    enable = true;
+    layout = [
+      {
+        type = "padding";
+        val = 2;
+      }
+      {
+        type = "text";
+        opts = {
+          hl = "Type";
+          position = "center";
+        };
+        val = [
+        "                                                                       "
+        "                                                                       "
+        "                                                                       "
+        "                                                                       "
+        "                                                                     "
+        "       ████ ██████           █████      ██                     "
+        "      ███████████             █████                             "
+        "      █████████ ███████████████████ ███   ███████████   "
+        "     █████████  ███    █████████████ █████ ██████████████   "
+        "    █████████ ██████████ █████████ █████ █████ ████ █████   "
+        "  ███████████ ███    ███ █████████ █████ █████ ████ █████  "
+        " ██████  █████████████████████ ████ █████ █████ ████ ██████ "
+        "                                                                       "
+        "                                                                       "
+        "                                                                       "
+	];
+      }
+      {
+        type = "padding";
+        val = 2;
+      }
+      {
+        type = "group";
+        val = [
           {
-            type = "padding";
-            val = 2;
+            type = "button";
+            val = "  New file";
+            opts.shortcut = "n";
+            on_press.__raw = "function() vim.cmd[[ene]] end";
           }
           {
-            opts = {
-              hl = "Type";
-              position = "center";
-            };
-            type = "text";
-            val = [
-              "███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
-              "████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
-              "██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
-              "██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
-              "██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
-              "╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
-            ];
+            type = "button";
+            val = "󰮗  Find file";
+            opts.shortcut = "f";
+            on_press.__raw = "function() vim.cmd[[Telescope find_files]] end";
           }
           {
-            type = "padding";
-            val = 2;
+            type = "button";
+            val = "󰄉  Recent";
+            opts.shortcut = "r";
+            on_press.__raw = "function() vim.cmd[[Telescope oldfiles]] end";
           }
           {
-            type = "group";
-            val = [
-              {
-                on_press = {
-                  __raw = "function() vim.cmd[[ene]] end";
-                };
-                opts = {
-                  shortcut = "n";
-                };
-                type = "button";
-                val = "  New file";
-              }
-              {
-                on_press = {
-                  __raw = "function() vim.cmd[[qa]] end";
-              };
-                opts = {
-                shortcut = "q";
-              };
-                type = "button";
-                val = " Quit Neovim";
-              }
-            ];
+            type = "button";
+            val = "󰿅 Quit Neovim";
+            opts.shortcut = "q";
+            on_press.__raw = "function() vim.cmd[[qa]] end";
           }
-          {
-            type = "padding";
-            val = 2;
-          }
-          {
-            opts = {
-              hl = "Keyword";
-              position = "center";
-            };
-            type = "text";
-            val = "Inspiring quote here.";
-          }
-      ];      
-    }
+        ];
+      }
+      {
+        type = "padding";
+        val = 2;
+      }
+      {
+        type = "text";
+        opts = {
+          hl = "Keyword";
+          position = "center";
+        };
+        val = [
+        "┳┓┓┏  ┏┳┓┓┏┏┓  ┓ ┏┏┓┓┏"
+        "┣┫┗┫   ┃ ┣┫┣   ┃┃┃┣┫┗┫"
+        "┻┛┗┛   ┻ ┛┗┗┛  ┗┻┛┛┗┗┛"	
+	];
+      }
+    ];
+  };
+}
 

@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs.nixvim = {
-    enable = true;
-    plugins = import ./plugins;
-  };
+  programs.nixvim.enable = true;
+  imports = import ./plugins;
 }
