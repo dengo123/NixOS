@@ -28,7 +28,7 @@
       browser = "";
       term = "ghostty";
       shell = "zsh";
-      editor = "nvim";
+      editor = "nixvim";
     };
 
     # ----- PACKAGES ----- #

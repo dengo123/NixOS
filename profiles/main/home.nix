@@ -16,6 +16,8 @@
   home.username = userSettings.username;
   home.homeDirectory = "/home/"+userSettings.username;
 
+  home.activation.backupFileExtension = "";
+
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your

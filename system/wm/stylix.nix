@@ -5,12 +5,12 @@ let
   wallpaperPath =
     if builtins.pathExists "${themeDir}/background.png"
     then "${themeDir}/background.png"
-    else ../../themes/wallpapers/${userSettings.wallpaper};
+    else ../../themes/wallpapers/${userSettings.wallpaper}.png;
 
   hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
-  base16 = if hasColorsToml
-    then lib.importTOML "${themeDir}/colors.toml"
-    else config.stylix.colors;
+  importedColors = lib.importTOML "${themeDir}/colors.toml";
+
+  tomlGenerator = pkgs.formats.toml { };
 in
 {
   imports = [ inputs.stylix.nixosModules.stylix ];
@@ -20,7 +20,7 @@ in
     image = wallpaperPath;
     polarity = "dark";
 
-    base16Scheme = lib.mkIf hasColorsToml base16;
+    base16Scheme = lib.mkIf hasColorsToml importedColors;
 
     fonts.monospace = {
       package = userSettings.fontPkg;
@@ -42,9 +42,9 @@ in
     enableReleaseChecks = false;
   };
 
-  environment.etc."stylix/colors.toml".text =
+  environment.etc."stylix/colors.toml".source =
     if hasColorsToml
-    then builtins.readFile "${themeDir}/colors.toml"
-    else lib.generators.toTOML {} base16;
+    then "${themeDir}/colors.toml"
+    else tomlGenerator.generate "colors.toml" config.stylix.base16Scheme;
 }
 

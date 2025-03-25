@@ -11,6 +11,8 @@ in {
     };
   };
 
+  home.packages = with pkgs; [ kitty ];
+
   programs.bash.profileExtra = ''
     if [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Hyprland >/dev/null; then
       exec Hyprland
