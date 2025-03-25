@@ -21,7 +21,7 @@
       name = "Deniz";
       email = "deniz060198@hotmail.com";
       theme = "";
-      wallpaper = ./themes/wallpapers/nixos_waves.png;
+      wallpaper = "nixos_waves";
       font = "Intel One Mono";
       fontPkg = pkgs.intel-one-mono;
       wm = "cosmic";

@@ -5,7 +5,7 @@ let
   wallpaperPath =
     if builtins.pathExists "${themeDir}/background.png"
     then "${themeDir}/background.png"
-    else ../../themes/wallpapers/${userSettings.wallpaper};
+    else ../../themes/wallpapers/${userSettings.wallpaper}.png;
 
   hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
   base16 = if hasColorsToml
