@@ -1,6 +1,3 @@
-version = 2
-final_space = true
-
 [[blocks]]
 type = "prompt"
 alignment = "left"
@@ -87,5 +84,5 @@ newline = true
   type = "text"
   style = "plain"
   foreground = "p:base0C"
-  template = "{{ if .Root }}╰─⫸ #{{ else }}╰─⫸ {{ end }}"
+  template = "╰─⫸ {{ if .Root }}#{{ end }}"
 

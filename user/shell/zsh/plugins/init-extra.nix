@@ -9,7 +9,7 @@
 
   programs.zsh.initExtra = ''
     ## oh-my-posh
-    eval "$(oh-my-posh init zsh --config ~/.config/zsh/themes/oh-my-posh/generated.omp.toml)"
+    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/generated.omp.toml)"
 
     ## yazi-Funktion für automatische Ordnernavigation
     function y() {
