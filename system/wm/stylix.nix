@@ -8,7 +8,7 @@ let
     else ../../themes/wallpapers/${userSettings.wallpaper}.png;
 
   hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
-  importedColors = lib.importTOML "${themeDir}/colors.toml";
+  importedColorsPath = "${themeDir}/colors.toml";
 
   tomlGenerator = pkgs.formats.toml { };
 in
@@ -20,7 +20,7 @@ in
     image = wallpaperPath;
     polarity = "dark";
 
-    base16Scheme = lib.mkIf hasColorsToml importedColors;
+    base16Scheme = lib.mkIf hasColorsToml (lib.importTOML importedColorsPath);
 
     fonts.monospace = {
       package = userSettings.fontPkg;
@@ -44,7 +44,7 @@ in
 
   environment.etc."stylix/colors.toml".source =
     if hasColorsToml
-    then "${themeDir}/colors.toml"
+    then importedColorsPath
     else tomlGenerator.generate "colors.toml" config.stylix.base16Scheme;
 }
 

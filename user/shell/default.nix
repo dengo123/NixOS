@@ -7,5 +7,6 @@
     ./${userSettings.shell}/${userSettings.shell + ".nix"}
     ./editor/${userSettings.editor}/${userSettings.editor + ".nix"}
     ./rice.nix
+    ./yazi
   ];
 }

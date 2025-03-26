@@ -15,7 +15,6 @@
     zoxide          # Vergangene Pfad Navigierung
     xclip           # system clipboard support
     fzf             # Fuzzy-Finder
-    yazi            # TUI File Manager
   ];
 }
 

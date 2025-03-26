@@ -9,7 +9,7 @@
 
   programs.zsh.initExtra = ''
     ## oh-my-posh
-    eval "$(oh-my-posh init zsh --config ${config.home.homeDirectory}/.dotfiles/config/zsh/themes/omp/everforest.toml)"
+    eval "$(oh-my-posh init zsh --config ~/.config/zsh/themes/oh-my-posh/generated.omp.toml)"
 
     ## yazi-Funktion für automatische Ordnernavigation
     function y() {

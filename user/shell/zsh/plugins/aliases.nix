@@ -13,7 +13,7 @@
     e = "emacs";
     cl = "clear";
     r = "reboot";
-    pw = "poweroff";
+    po = "poweroff";
     g = "git";
     ga = "git add";
     gaa = "git add --all";
