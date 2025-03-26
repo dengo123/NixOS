@@ -36,10 +36,10 @@
         val = [
           {
             type = "button";
-            val = "     New file   ";
+            val = "       New file   ";
             opts = {
               position = "center";
-              shortcut = "n";
+                shortcut = "n";
               keymap = [ "n" "n" ":ene | startinsert<CR>" ];
             };
           }
@@ -47,10 +47,10 @@
 
           {
             type = "button";
-            val = "󰮗     Find file  ";
+            val = "  󰮗     Find file  ";
             opts = {
               position = "center";
-              shortcut = "f";
+                shortcut = "f";
               keymap = [ "n" "f" ":Telescope find_files<CR>" ];
             };
           }
@@ -58,10 +58,10 @@
 
           {
             type = "button";
-            val = "󰄉     Recent     ";
+            val = "  󰄉     Recent     ";
             opts = {
               position = "center";
-              shortcut = "r";
+                shortcut = "r";
               keymap = [ "n" "r" ":Telescope oldfiles<CR>" ];
             };
           }
@@ -69,10 +69,10 @@
 
           {
             type = "button";
-            val = "     Quit       ";
+            val = "       Quit       ";
             opts = {
               position = "center";
-              shortcut = "q";
+                shortcut = "q";
               keymap = [ "n" "q" ":qa<CR>" ];
             };
           }
