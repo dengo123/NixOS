@@ -2,15 +2,10 @@
 
 {
   home.packages = with pkgs; [
-    oh-my-posh
-    yazi
     fzf
   ];
 
   programs.zsh.initExtra = ''
-    ## oh-my-posh
-    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/generated.omp.toml)"
-
     ## yazi-Funktion für automatische Ordnernavigation
     function y() {
       local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

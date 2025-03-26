@@ -20,11 +20,11 @@
       username = "dengo123";
       name = "Deniz";
       email = "deniz060198@hotmail.com";
-      theme = "";
-      wallpaper = "nixos_waves";
+      theme = "catppuccin-mocha";
+      wallpaper = "";
       font = "Intel One Mono";
       fontPkg = pkgs.intel-one-mono;
-      wm = "cosmic";
+      wm = "hyprland";
       browser = "";
       term = "ghostty";
       shell = "zsh";
@@ -44,9 +44,9 @@
     };
 
     specialArgs = if userSettings.wm == "cosmic" then
-      { inherit systemSettings userSettings inputs; }
+      { inherit systemSettings userSettings inputs stylix; }
     else
-      { inherit systemSettings userSettings inputs pkgs; };
+      { inherit systemSettings userSettings inputs pkgs stylix; };
 
   in {
     nixosConfigurations = {

@@ -2,7 +2,7 @@
 
 [
   # Terminal & Browser
-  "SUPER, RETURN, exec, ${userSettings.term}"
+  "SUPER, RETURN, exec, ${pkgs.${userSettings.term}}/bin/${userSettings.term}"
   "SUPER, B, exec, ${pkgs.firefox}/bin/firefox"
 
   # Screenshot

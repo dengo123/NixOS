@@ -1,14 +1,15 @@
-{ config, lib, pkgs, userSettings, ... }:
+{ config, pkgs, userSettings, lib, ... }:
 
 {
   imports = [
     ./core.nix
     ./hyprlock.nix
-    ./hyprpaper.nix
     ./waybar.nix
+    ./swww.nix
     ./dunst.nix
-    ./applets.nix
-    ./plugins.nix
+    ./wofi.nix
+  # ./plugins.nix
   ];
 }
+
 
