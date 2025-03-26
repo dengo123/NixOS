@@ -1,4 +1,5 @@
 [ 
+  ./omp.nix
   ./autosuggestions.nix
   ./aliases.nix
   ./keymap.nix
