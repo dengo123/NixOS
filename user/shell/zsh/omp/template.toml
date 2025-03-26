@@ -1,5 +1,17 @@
-version = 2
+version = 3
 final_space = true
+
+[palette]
+white = "{{base05}}"
+red = "{{base08}}"
+orange = "{{base0F}}"
+yellow = "{{base09}}"
+green = "{{base0B}}"
+cyan = "{{base0C}}"
+blue = "{{base0D}}"
+magenta = "{{base0E}}"
+grey = "{{base03}}"
+obsidian = "{{base00}}"
 
 [[blocks]]
 type = "prompt"
@@ -9,8 +21,8 @@ newline = true
   [[blocks.segments]]
   type = "os"
   style = "diamond"
-  foreground = "p:base00"
-  background = "p:base0C"
+  foreground = "p:obsidian"
+  background = "p:cyan"
   leading_diamond = "╭─"
   template = " {{ .Icon }} "
 
@@ -26,8 +38,8 @@ newline = true
   [[blocks.segments]]
   type = "path"
   style = "powerline"
-  foreground = "p:base00"
-  background = "p:base0D"
+  foreground = "p:obsidian"
+  background = "p:blue"
   powerline_symbol = "\ue0b0"
   template = " {{ .Path }} "
 
@@ -38,10 +50,10 @@ newline = true
   [[blocks.segments]]
   type = "git"
   style = "diamond"
-  foreground = "p:base0B"
-  background = "p:base00"
+  foreground = "p:green"
+  background = "p:obsidian"
   trailing_diamond = "\ue0b0"
-  template = " {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <transparent>\ue0b1</> <p:base08>\uf044 {{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <transparent>\ue0b1</> <p:base0F>\uf046 {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <transparent>\ue0b1</> <p:base03>\ueb4b {{ .StashCount }}</>{{ end }} "
+  template = " {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <transparent>\ue0b1</> <p:red>\uf044 {{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <transparent>\ue0b1</> <p:orange>\uf046 {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <transparent>\ue0b1</> <p:grey>\ueb4b {{ .StashCount }}</>{{ end }} "
 
     [blocks.segments.properties]
     branch_icon = " "
@@ -56,8 +68,8 @@ alignment = "right"
   [[blocks.segments]]
   type = "executiontime"
   style = "powerline"
-  foreground = "p:base0A"
-  background = "p:base00"
+  foreground = "p:yellow"
+  background = "p:obsidian"
   invert_powerline = true
   powerline_symbol = "\ue0b2"
   template = " \ueba2 {{ .FormattedMs }} "
@@ -69,8 +81,8 @@ alignment = "right"
   [[blocks.segments]]
   type = "time"
   style = "diamond"
-  foreground = "p:base00"
-  background = "p:base0A"
+  foreground = "p:obsidian"
+  background = "p:yellow"
   invert_powerline = true
   trailing_diamond = "\ue0b4"
   template = " \uf017 {{ .CurrentDate | date .Format }} "
@@ -86,6 +98,6 @@ newline = true
   [[blocks.segments]]
   type = "text"
   style = "plain"
-  foreground = "p:base0C"
+  foreground = "p:cyan"
   template = "{{ if .Root }}╰─⫸ #{{ else }}╰─⫸ {{ end }}"
 
