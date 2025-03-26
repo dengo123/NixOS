@@ -37,7 +37,7 @@ newline = true
   foreground = "p:base00"
   background = "p:base0D"
   powerline_symbol = "\ue0b0"
-  template = "  {{ .Path }} "
+  template = "   {{ .Path }} "
 
     [blocks.segments.properties]
     style = "agnoster_short"
@@ -49,7 +49,7 @@ newline = true
   foreground = "p:base0B"
   background = "p:base00"
   trailing_diamond = "\ue0b0"
-  template = " {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <transparent>\ue0b1</> <p:base08>\uf044 {{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <transparent>\ue0b1</> <p:base0F>\uf046 {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <transparent>\ue0b1</> <p:base03>\ueb4b {{ .StashCount }}</>{{ end }} "
+  template = " {{ .HEAD }}{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <transparent>\ue0b1</> <p:base08>\uf044 {{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }} <transparent>\ue0b1</> <p:base09>\uf046 {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <transparent>\ue0b1</> <p:base0A>\ueb4b {{ .StashCount }}</>{{ end }} "
 
     [blocks.segments.properties]
     branch_icon = " "
@@ -64,7 +64,7 @@ alignment = "right"
   [[blocks.segments]]
   type = "executiontime"
   style = "powerline"
-  foreground = "p:base09"
+  foreground = "p:base0A"
   background = "p:base00"
   invert_powerline = true
   powerline_symbol = "\ue0b2"
@@ -78,7 +78,7 @@ alignment = "right"
   type = "time"
   style = "diamond"
   foreground = "p:base00"
-  background = "p:base09"
+  background = "p:base0A"
   invert_powerline = true
   trailing_diamond = "\ue0b4"
   template = " \uf017 {{ .CurrentDate | date .Format }} "
