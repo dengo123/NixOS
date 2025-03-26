@@ -1,44 +1,43 @@
-{ config, lib, pkgs, stylix, ... }:
+{ config, pkgs, lib, userSettings, ... }:
 
 let
-  inherit (stylix.colors)
-    base00 base01 base02 base03 base04 base05 base06 base07
-    base08 base09 base0A base0B base0C base0D base0E base0F accent;
-
+  themeDir = ../../../../themes/${userSettings.theme};
+  stylixColors = lib.importTOML "${themeDir}/colors.toml";
   template = builtins.readFile ../omp/template-base16.toml;
 
-  replacements = {
-    "p:base00" = base00;
-    "p:base01" = base01;
-    "p:base02" = base02;
-    "p:base03" = base03;
-    "p:base04" = base04;
-    "p:base05" = base05;
-    "p:base06" = base06;
-    "p:base07" = base07;
-    "p:base08" = base08;
-    "p:base09" = base09;
-    "p:base0A" = base0A;
-    "p:base0B" = base0B;
-    "p:base0C" = base0C;
-    "p:base0D" = base0D;
-    "p:base0E" = base0E;
-    "p:base0F" = base0F;
-    "p:accent" = accent;
-  };
-
-  rendered = lib.foldlAttrs
-    (acc: key: value: builtins.replaceStrings [ key ] [ value ] acc)
-    template
-    replacements;
+  rendered = lib.replaceStrings
+    [
+      "p:base00" "p:base01" "p:base02" "p:base03"
+      "p:base04" "p:base05" "p:base06" "p:base07"
+      "p:base08" "p:base09" "p:base0A" "p:base0B"
+      "p:base0C" "p:base0D" "p:base0E" "p:base0F"
+    ] [
+      stylixColors.base00 stylixColors.base01 stylixColors.base02 stylixColors.base03
+      stylixColors.base04 stylixColors.base05 stylixColors.base06 stylixColors.base07
+      stylixColors.base08 stylixColors.base09 stylixColors.base0A stylixColors.base0B
+      stylixColors.base0C stylixColors.base0D stylixColors.base0E stylixColors.base0F
+    ] template;
 
 in {
-  home.packages = [ pkgs.oh-my-posh ];
+  programs.oh-my-posh.enable = true;
 
-  xdg.configFile."oh-my-posh/themes/stylix.omp.toml".text = rendered;
+  home.file.".config/oh-my-posh/stylix.toml".text = rendered;
 
   programs.zsh.initExtra = ''
-    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/themes/stylix.omp.toml)"
+    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/stylix.toml)"
+
+    ## yazi-Funktion für automatische Ordnernavigation
+    function y() {
+      local tmp="$(mktemp -t \"yazi-cwd.XXXXXX\")" cwd
+      yazi "$@" --cwd-file="$tmp"
+      if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+      fi
+      rm -f -- "$tmp"
+    }
+
+    ## fzf keybindings + completion
+    [ -f "${pkgs.fzf}/share/fzf/key-bindings.zsh" ] && source "${pkgs.fzf}/share/fzf/key-bindings.zsh"
+    [ -f "${pkgs.fzf}/share/fzf/completion.zsh" ] && source "${pkgs.fzf}/share/fzf/completion.zsh"
   '';
 }
-

@@ -1,3 +1,6 @@
+version = 3
+final_space = true
+
 [[blocks]]
 type = "prompt"
 alignment = "left"
@@ -19,6 +22,14 @@ newline = true
     nix = "\uf313"
     macos = "\ue711"
     windows = "\ue70f"
+  
+  [[blocks.segments]]
+  type = "text"
+  style = "powerline"
+  foreground = "p:base01"
+  background = "p:base01"
+  powerline_symbol = "\ue0b0"
+  template = " "
 
   [[blocks.segments]]
   type = "path"
@@ -26,7 +37,7 @@ newline = true
   foreground = "p:base00"
   background = "p:base0D"
   powerline_symbol = "\ue0b0"
-  template = " {{ .Path }} "
+  template = "  {{ .Path }} "
 
     [blocks.segments.properties]
     style = "agnoster_short"
@@ -53,7 +64,7 @@ alignment = "right"
   [[blocks.segments]]
   type = "executiontime"
   style = "powerline"
-  foreground = "p:base0A"
+  foreground = "p:base09"
   background = "p:base00"
   invert_powerline = true
   powerline_symbol = "\ue0b2"
@@ -67,7 +78,7 @@ alignment = "right"
   type = "time"
   style = "diamond"
   foreground = "p:base00"
-  background = "p:base0A"
+  background = "p:base09"
   invert_powerline = true
   trailing_diamond = "\ue0b4"
   template = " \uf017 {{ .CurrentDate | date .Format }} "
@@ -84,5 +95,5 @@ newline = true
   type = "text"
   style = "plain"
   foreground = "p:base0C"
-  template = "╰─⫸ {{ if .Root }}#{{ end }}"
+  template = "╰─⫸ {{ if .Root }}#{{else}}{{end}}"
 

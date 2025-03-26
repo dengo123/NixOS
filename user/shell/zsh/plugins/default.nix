@@ -5,6 +5,6 @@
   ./keymap.nix
   ./syntax-style.nix
   ./history.nix
-  ./init-extra.nix
+  #  ./init-extra.nix
 ]
 
