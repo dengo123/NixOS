@@ -1,0 +1,39 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 40,
+  "spacing": 10,
+  "modules-left": ["custom/power", "custom/bluetooth", "network"],
+  "modules-center": ["clock"],
+  "modules-right": ["cpu", "memory"],
+
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": "Shutdown Menu",
+    "on-click": "systemctl poweroff"
+  },
+  "custom/bluetooth": {
+    "format": "",
+    "tooltip": "Bluetooth Settings",
+    "on-click": "blueberry"
+  },
+  "network": {
+    "format-wifi": "📶 {essid}",
+    "format-ethernet": "🔌 {ipaddr}",
+    "tooltip-format": "{ifname}: {ipaddr}",
+    "on-click": "nm-connection-editor"
+  },
+  "cpu": {
+    "format": "CPU: {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "RAM: {used:0.1f}G",
+    "tooltip": false
+  },
+  "clock": {
+    "format": "  {:%a, %d %b %H:%M}",
+    "tooltip": false
+  }
+}
+

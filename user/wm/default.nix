@@ -8,7 +8,7 @@ in {
   imports = wmModule ++ [
     ./applets.nix
     #  ./wofi
-    #  ./waybar
+    ./waybar
   ];
 }
 
