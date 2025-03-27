@@ -1,12 +1,9 @@
 { config, pkgs, userSettings, ... }:
 
 {
-  imports = let
-    wmModule = if userSettings.wm == "cosmic"
-      then []
-    else [ ../../user/wm/${userSettings.wm} ];
-     in wmModule ++ 
+  imports =  
     [ 
+      ../../user/wm
       ../../user/shell      
       ../../user/app
     ];

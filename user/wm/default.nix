@@ -1,9 +1,14 @@
 { config, pkgs, lib, userSettings, ... }:
-
-{
-  imports = [
+let
+  wmModule =
+    if userSettings.wm == "cosmic"
+    then []
+    else [ ./${userSettings.wm} ];
+in {
+  imports = wmModule ++ [
     ./applets.nix
-    ./${userSettings.wm}
-    ./stylix-home.nix
+    #  ./wofi
+    #  ./waybar
   ];
 }
+

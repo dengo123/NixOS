@@ -41,11 +41,5 @@ in
 
     enableReleaseChecks = false;
   };
-
-  # Bereitstellung von colors.toml im Home-Verzeichnis
-  home.file.".config/stylix/colors.toml".source =
-    if hasColorsToml
-    then importedColorsPath
-    else tomlGenerator.generate "colors.toml" config.stylix.base16Scheme;
 }
 
