@@ -9,7 +9,7 @@ in
   imports = wmModule ++ [
     # ./ml4w/ml4w.nix
     ./applets.nix
-    ./wofi
+    # ./wofi
     ./waybar
   ];
 }
