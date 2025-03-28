@@ -2,12 +2,14 @@
 let
   wmModule =
     if userSettings.wm == "cosmic"
-    then []
+  then []
     else [ ./${userSettings.wm} ];
-in {
+in 
+{
   imports = wmModule ++ [
+    # ./ml4w/ml4w.nix
     ./applets.nix
-    #  ./wofi
+    ./wofi
     ./waybar
   ];
 }

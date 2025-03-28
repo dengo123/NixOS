@@ -1,39 +1,77 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 40,
-  "spacing": 10,
-  "modules-left": ["custom/power", "custom/bluetooth", "network"],
-  "modules-center": ["clock"],
-  "modules-right": ["cpu", "memory"],
+  "modules-left": [
+    "window",
+    "taskbar",
+    "custom/wofi"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "group/system",
+    "custom/power",
+    "bluetooth",
+    "network",
+    "clock"
+  ],
 
-  "custom/power": {
-    "format": "⏻",
-    "tooltip": "Shutdown Menu",
-    "on-click": "systemctl poweroff"
+  "group/system": {
+    "orientation": "horizontal",
+    "modules": ["disk", "memory", "cpu"]
   },
-  "custom/bluetooth": {
-    "format": "",
-    "tooltip": "Bluetooth Settings",
-    "on-click": "blueberry"
-  },
-  "network": {
-    "format-wifi": "📶 {essid}",
-    "format-ethernet": "🔌 {ipaddr}",
-    "tooltip-format": "{ifname}: {ipaddr}",
-    "on-click": "nm-connection-editor"
-  },
+
   "cpu": {
-    "format": "CPU: {usage}%",
-    "tooltip": false
+    "interval": 5,
+    "format": " {usage}%"
   },
   "memory": {
-    "format": "RAM: {used:0.1f}G",
-    "tooltip": false
+    "interval": 5,
+    "format": "󰍛 {used}M"
   },
+  "disk": {
+    "interval": 60,
+    "format": " {free}G"
+  },
+
   "clock": {
-    "format": "  {:%a, %d %b %H:%M}",
-    "tooltip": false
+    "format": "{:%a %d. %b  %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{:%d.%m.%Y}</tt>",
+    "on-click": "gsimplecal"
+  },
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈁 {ipaddr}"
+  },
+  "bluetooth": {
+    "format": "",
+    "on-click": "blueman-manager"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": ["", "", ""],
+    "on-click": "pavucontrol"
+  },
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "wlogout"
+  },
+  "custom/wofi": {
+    "format": "",
+    "on-click": "wofi --show drun"
+  },
+  "window": {
+    "max-length": 50
+  },
+  "taskbar": {
+    "icon-size": 18
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate"
   }
 }
 

@@ -15,9 +15,14 @@ in
 
   home.packages = with pkgs; [
     waybar
+    networkmanagerapplet
     blueberry
     brightnessctl
     playerctl
+    pavucontrol
+    gsimplecal
+    blueman
+    wlogout
   ];
 
   wayland.windowManager.hyprland.settings.exec-once = [
