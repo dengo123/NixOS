@@ -3,10 +3,14 @@
 {
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
   };
 
-  services.desktomManager.sddm = {
-    enable = true;
+  services.displayManager = {
+    sddm = {
+      enable = true;
+    };
+    defaultSession = "hyprland-uwsm";
   };
 
   environment.systemPackages = with pkgs; [
