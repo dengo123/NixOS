@@ -8,6 +8,7 @@ in
 {
   imports = wmModule ++ [
     # ./ml4w/ml4w.nix
+    ./stylix-home.nix
     ./applets.nix
     # ./wofi
     ./waybar

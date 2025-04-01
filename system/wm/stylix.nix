@@ -17,6 +17,7 @@ in
 
   stylix = {
     enable = true;
+
     image = wallpaperPath;
     polarity = "dark";
 
@@ -32,14 +33,6 @@ in
       package = pkgs.bibata-cursors;
       size = 22;
     };
-
-    targets = {
-      console.enable = true;
-      gtk.enable = true;
-      gnome.enable = true;
-    };
-
-    enableReleaseChecks = false;
   };
 }
 

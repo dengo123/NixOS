@@ -14,7 +14,7 @@
     ./conf/workspace.nix
     ./conf/misc.nix
     ./conf/keybinding.nix
-    ./conf/windowrule.nix
+    ./conf/windowrules.nix
     ./conf/animation.nix
   ];
 
