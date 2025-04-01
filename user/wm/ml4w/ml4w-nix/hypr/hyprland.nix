@@ -13,7 +13,7 @@
     ./conf/layout.nix
     ./conf/workspace.nix
     ./conf/misc.nix
-    ./conf/keybinding.nix
+    ./conf/keybindings.nix
     ./conf/windowrules.nix
     ./conf/animation.nix
   ];
