@@ -1,45 +1,58 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, userSettings, ... }:
 
 {
   programs.hyprlock = {
     enable = true;
 
     settings = {
-      background = [
+      input-fields = [
         {
           monitor = "";
-          path = "${../../themes/${config.userSettings.theme}/background.png}";
-          blur = true;
+          size = {
+            width = 250;
+            height = 60;
+          };
+          outline_thickness = 3;
+          dots_size = 0.33;
+          dots_spacing = 0.15;
+          dots_center = true;
+          outer_color = "rgba(0, 0, 0, 0.5)";
+          inner_color = "rgba(255, 255, 255, 0.2)";
+          font_color = "rgba(255, 255, 255, 1.0)";
         }
       ];
 
-      label = [
+      labels = [
         {
           monitor = "";
-          text = "Welcome back, ${config.userSettings.username}!";
-          color = "rgba(ffffffcc)";
-          font_size = 24;
-          position = "0, -150";
+          text = "Welcome, ${userSettings.name}";
+          position = {
+            x = 0.5;
+            y = 0.35;
+          };
+          font_size = 26;
+          valign = "center";
+          halign = "center";
+        }
+
+        {
+          monitor = "";
+          text = "$TIME";
+          position = {
+            x = 0.5;
+            y = 0.45;
+          };
+          font_size = 32;
           valign = "center";
           halign = "center";
         }
       ];
 
-      input-field = [
-        {
-          monitor = "";
-          size = "300, 50";
-          outline_thickness = 2;
-          dots_size = 0.2;
-          dots_spacing = 0.2;
-          inner_color = "rgba(000000aa)";
-          font_color = "rgb(ffffff)";
-          outline_color = "rgb(888888)";
-          position = "0, 50";
-          halign = "center";
-          valign = "center";
-        }
-      ];
+      general = {
+        hide_cursor = true;
+        grace = 5;
+        no_fade_in = false;
+      };
     };
   };
 }

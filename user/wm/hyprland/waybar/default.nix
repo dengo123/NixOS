@@ -1,30 +1,13 @@
 { config, pkgs, lib, userSettings, ... }:
 
 let
-  themeDir = ../../themes/${userSettings.theme};
+  themeDir = ../../../../themes/${userSettings.theme};
   colors = lib.importTOML "${themeDir}/colors.toml";
-
-  systemMonitorScript = pkgs.writeShellScript "waybar-system-status" ''
-    cpu="$(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}')"
-    ram="$(free -h | awk '/Mem:/ {print $3 "/" $2}')"
-    gpu="$(lspci | grep -i 'vga\\|3d\\|display' | cut -d ':' -f3- | sed 's/^ *//')"
-
-    get_disk_info() {
-      df -h "$1" 2>/dev/null | awk 'NR==2 {print $6 ": " $4 " frei"}'
-    }
-
-    disk_home=$(get_disk_info /home)
-    disk_nix=$(get_disk_info /nix)
-    disk_root=$(get_disk_info /)
-    disk_extra=$(get_disk_info /mnt/8tb)
-
-    echo "{\"text\": \"\", \"tooltip\": \"CPU: ${cpu}%\\nRAM: ${ram}\\nGPU: ${gpu}\\n${disk_home}\\n${disk_nix}\\n${disk_root}\\n${disk_extra}\"}"
-  '';
 
   waybarConfig = pkgs.writeText "waybar-config.json" (builtins.toJSON {
     layer = "top";
     position = "top";
-    height = 30;
+    height = 15;
     margin = "10";
     spacing = 4;
 
@@ -48,7 +31,9 @@ let
       "pulseaudio"
       "custom-playerctl"
       "custom-brightness"
-      "custom-system"
+      "disk"
+      "memory"
+      "cpu"
       "custom-power"
     ];
 
@@ -119,13 +104,20 @@ let
       on-click = "blueman-manager";
     };
 
-    "custom-system" = {
-      format = "";
-      tooltip = true;
-      return-type = "json";
-      exec = systemMonitorScript;
-      interval = 10;
-      on-click = "${userSettings.term} -e btop";
+    "disk" = {
+      format = " {free}";
+      path = "/home";
+      interval = 30;
+    };
+
+    "memory" = {
+      format = " {used:0.1f}G";
+      interval = 5;
+    };
+
+    "cpu" = {
+      format = " {usage}%";
+      interval = 5;
     };
 
     "custom-power" = {
@@ -145,11 +137,10 @@ let
     }
 
     #waybar {
-      background-color: rgba(0, 0, 0, 0.5); /* Transparent */
+      background-color: rgba(0, 0, 0, 0.5);
       color: ${colors.base05};
     }
 
-    /* Floating Button-Stil */
     #workspaces button,
     #window,
     #taskbar,
@@ -161,10 +152,12 @@ let
     #custom-calendar,
     #custom-playerctl,
     #custom-brightness,
-    #custom-system,
     #network,
     #bluetooth,
-    #pulseaudio {
+    #pulseaudio,
+    #cpu,
+    #memory,
+    #disk {
       background-color: rgba(255, 255, 255, 0.1);
       margin: 4px 6px;
       padding: 4px 10px;
@@ -191,7 +184,6 @@ in
     brightnessctl
     playerctl
     thunderbird
-    btop
   ];
 
   programs.waybar = {

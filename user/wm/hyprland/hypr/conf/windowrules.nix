@@ -1,24 +1,42 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 {
-  wayland.windowManager.hyprland.settings.windowrule = [
-    # Wlogout zentrieren und floating
-    "float, ^(wlogout)$"
-    "center, ^(wlogout)$"
+  wayland.windowManager.hyprland.settings.windowrulev2 = [
+    # 🟦 wlogout: Power-Menü
+    "float, ^wlogout$"
+    "center, ^wlogout$"
+    "noblur, ^wlogout$"
 
-    # Pavucontrol
-    "float, ^(pavucontrol)$"
-    "center, ^(pavucontrol)$"
+    # 🟡 gsimplecal: Kalender-App
+    "float, ^gsimplecal$"
+    "center, ^gsimplecal$"
+    "noblur, ^gsimplecal$"
 
-    # Bluetooth Manager
-    "float, ^(blueman-manager)$"
-    "center, ^(blueman-manager)$"
+    # 🔵 pavucontrol: Audio-Manager
+    "float, ^pavucontrol$"
+    "center, ^pavucontrol$"
 
-    # Network Manager GUI
-    "float, ^(nm-connection-editor)$"
-    "center, ^(nm-connection-editor)$"
+    # 🟢 blueman-manager: Bluetooth
+    "float, ^blueman-manager$"
+    "center, ^blueman-manager$"
 
-    # Optional: andere CLI-basierte Tools wie nmtui nicht nötig
+    # 🟣 nm-connection-editor: Netzwerkverwaltung
+    "float, ^nm-connection-editor$"
+    "center, ^nm-connection-editor$"
+
+    # 🔘 gnome-calculator (Taschenrechner)
+    "float, ^gnome-calculator$"
+    "center, ^gnome-calculator$"
+
+    # 🔶 thunderbird: E-Mail-Client
+    "workspace special:mail silent, ^thunderbird$"
+
+    # 🧪 btop (Terminal-App, aber zentrierbar bei Bedarf)
+    "float, ^btop$"
+    "center, ^btop$"
+
+    # Optional: alle Dialoge standardmäßig floaten
+    "float, title:^(.*Dialog.*)$"
   ];
 }
 

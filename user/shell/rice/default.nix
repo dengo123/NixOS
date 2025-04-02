@@ -2,7 +2,7 @@
 
 {
   imports = [
-    rice.nix
-    fastfetch.nix
+    ./rice.nix
+    ./fastfetch.nix
   ];
 }
