@@ -29,9 +29,9 @@ in
     };
 
     cursor = {
-      name = userSettings.cursor or "Bibata-Modern-Ice";
-      package = pkgs.bibata-cursors;
-      size = 22;
+      name = userSettings.cursor;
+      package = userSettings.cursorPkg;
+      size = userSettings.cursorSize;
     };
   };
 }

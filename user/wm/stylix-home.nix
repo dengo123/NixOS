@@ -1,31 +1,41 @@
-{ inputs, config, pkgs, lib, userSettings, ... }:
+{ inputs, config, lib, pkgs, userSettings, ... }:
 
 let
   themeDir = ../../themes/${userSettings.theme};
-  hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
-  importedColorsPath = "${themeDir}/colors.toml";
-  monoFont = {
-    name = userSettings.font;
-    package = userSettings.fontPkg;
-  };
+  importedColors = lib.importTOML "${themeDir}/colors.toml";
 in
 {
   imports = [ inputs.stylix.homeManagerModules.stylix ];
 
   stylix = {
     enable = true;
-    autoEnable = true;
-
-    base16Scheme = lib.mkIf hasColorsToml (lib.importTOML importedColorsPath);
+    image = "${themeDir}/background.png";
+    polarity = "dark";
+    base16Scheme = importedColors;
 
     fonts = {
-      monospace = monoFont;
-      sansSerif = monoFont;
-      serif = monoFont;
-      emoji = {
-        name = "Noto Color Emoji";
-        package = pkgs.noto-fonts-emoji;
+      monospace = {
+        package = userSettings.fontPkg;
+        name = userSettings.font;
       };
+      serif = {
+        package = userSettings.fontPkg;
+        name = userSettings.font;
+      };
+      sansSerif = {
+        package = userSettings.fontPkg;
+        name = userSettings.font;
+      };
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
+
+    cursor = {
+      name = userSettings.cursor;
+      package = userSettings.cursorPkg;
+      size = userSettings.cursorSize;
     };
   };
 }

@@ -21,9 +21,11 @@
       name = "Deniz";
       email = "deniz060198@hotmail.com";
       theme = "catppuccin-mocha";
-      wallpaper = "";
       font = "Intel One Mono";
       fontPkg = pkgs.intel-one-mono;
+      cursor = "Adwaita";
+      cursorPkg = pkgs.adwaita-icon-theme;
+      cursorSize = 22;
       wm = "hyprland";
       browser = "";
       term = "ghostty";

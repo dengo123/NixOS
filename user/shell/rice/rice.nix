@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     #Fancies
-    fastfetch
+    btop
     pipes
     peaclock
     cbonsai

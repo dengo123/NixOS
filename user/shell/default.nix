@@ -6,7 +6,7 @@
     ./git.nix
     ./${userSettings.shell}/${userSettings.shell + ".nix"}
     ./editor/${userSettings.editor}
-    ./rice.nix
+    ./rice
     ./yazi
   ];
 }

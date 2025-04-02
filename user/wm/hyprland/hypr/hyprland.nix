@@ -11,7 +11,7 @@
     ./conf/window.nix
     ./conf/decoration.nix
     ./conf/layout.nix
-    ./conf/workspace.nix
+    #  ./conf/workspace.nix
     ./conf/misc.nix
     ./conf/keybindings.nix
     ./conf/windowrules.nix

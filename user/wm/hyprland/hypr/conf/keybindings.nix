@@ -58,6 +58,9 @@
 
       # ── Sperren ────────────────────────────────────────────
       "SUPER, L, exec, hyprlock"
+
+      # ── Shutdown Menü ──────────────────────────────────────
+      "SUPER, ESC, exec, wlogout"
     ];
   };
 }

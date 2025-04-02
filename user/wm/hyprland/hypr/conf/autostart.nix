@@ -10,9 +10,6 @@
     "dunst"
     "wlogout"
 
-    # Hintergrundbild mit swww (stylix-kompatibel)
-    "swww init && swww img ${../../themes/${userSettings.theme}/background.png}"
-
     # App Launcher (optional, nur wenn du rofi nutzt)
     "rofi -show drun"
 
