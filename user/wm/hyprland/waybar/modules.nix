@@ -7,7 +7,7 @@
   # Waybar verlangt hier einen Integer
   # Achtung: Falls dein CSS die Leiste höher macht,
   # bekommst du eine Warnung, "Requested height is less than min. needed".
-  height = 20;
+  height = 42;
 
   # margin muss bei vielen Waybar-Modulen ein String sein (falls Home-Manager das so fordert).
   margin = "0";
@@ -76,11 +76,10 @@
   };
 
   "custom/calendar" = {
-    # Hier ein Beispiel, wie du Datum/Uhrzeit mit strftime-Placeholders anzeigen kannst.
-    format = "{:%a %d.%m %H:%M}";
-    "tooltip-format" = "{:%Y-%m-%d %H:%M:%S}";
+    "exec" = "date +'%a %d.%m %H:%M'";
+    "interval" = 60;
+    "format" = "{}"; 
     "on-click" = "gsimplecal";
-    interval = 60;
   };
 
   "custom/playerctl" = {
@@ -96,13 +95,9 @@
 
   "custom/brightness" = {
     format = " {percent}%";
-    exec = ''
-      brightnessctl \
-        | awk '/Current/ {print $4}' \
-        | tr -d "()"
-    '';
-    interval = 5;
-    tooltip = false;
+    "exec" = "sh -c 'brightnessctl | awk \"/Current/ {print $4}\" | tr -d \"()\"'";
+    "interval" = 5;
+    tooltip = true;
   };
 
   "custom/power" = {

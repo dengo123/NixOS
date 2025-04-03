@@ -1,12 +1,7 @@
 { config, pkgs, userSettings, ... }:
 
 {
-  imports =  
-    [ 
-      ../../user/wm
-      ../../user/shell      
-      ../../user/app
-    ];
+  imports = [ ../../user ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

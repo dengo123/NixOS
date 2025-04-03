@@ -8,11 +8,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ../../system/boot/bootloader.nix
-      ../../system/hardware
-      ../../system/shell/${userSettings.shell}.nix
-      ../../system/wm
-      ../../system/services
+      ../../system
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

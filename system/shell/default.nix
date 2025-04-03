@@ -1,0 +1,7 @@
+{ userSettings, ... }:
+
+{
+  imports = [
+    ./${userSettings.shell}
+  ];
+}

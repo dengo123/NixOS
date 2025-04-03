@@ -19,8 +19,8 @@
     "center, class:nm-connection-editor"
 
     # ➗ gnome-calculator
-    "float, class:gnome-calculator"
-    "center, class:gnome-calculator"
+    "float, class:org.gnome.Calculator"
+    "center, class:org.gnome.Calculator"
   ];
 }
 
