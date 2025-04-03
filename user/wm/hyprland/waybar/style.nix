@@ -4,13 +4,11 @@ let
 in ''
   /* Grundlegender Font */
   * {
-    font-family: "${userSettings.font}", "Symbols Nerd Font", monospace;
-    font-size: 13px;
+    font-size: 12px;
     margin: 0px;
     padding: 0px;
   }
 
-  /* Halb- oder ganz transparent (je nach Vorliebe) */
   #waybar {
     background-color: rgba(0, 0, 0, 0.0);
     color: ${colors.base05};
@@ -35,8 +33,9 @@ in ''
   #memory,
   #disk {
     background-color: rgba(255, 255, 255, 0.1);
-    margin: 4px 6px;
-    padding: 4px 10px;
+    margin: 0 5px 5px 5px;
+    padding: 0 10px 0 10px;
+    border: 2px solid ${colors.base0D};
     border-radius: 10px;
   }
 

@@ -26,6 +26,7 @@ in {
     thunderbird
     networkmanagerapplet
     wlogout
+    nerd-fonts.symbols-only
     # usw.
   ];
 

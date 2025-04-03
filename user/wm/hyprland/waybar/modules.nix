@@ -7,10 +7,10 @@
   # Waybar verlangt hier einen Integer
   # Achtung: Falls dein CSS die Leiste höher macht,
   # bekommst du eine Warnung, "Requested height is less than min. needed".
-  height = 42;
+  height = 35;
 
   # margin muss bei vielen Waybar-Modulen ein String sein (falls Home-Manager das so fordert).
-  margin = "0";
+  margin = "10px 5px 0 5px";
   spacing = 3;
 
   # Hier die Anordnung der Module:
@@ -33,7 +33,6 @@
     "bluetooth"
     "pulseaudio"
     "custom/playerctl"
-    "custom/brightness"
     "disk"
     "memory"
     "cpu"
@@ -91,13 +90,6 @@
     };
     exec = "playerctl metadata --format '{{status}} {{title}}'";
     interval = 5;
-  };
-
-  "custom/brightness" = {
-    format = " {percent}%";
-    "exec" = "sh -c 'brightnessctl | awk \"/Current/ {print $4}\" | tr -d \"()\"'";
-    "interval" = 5;
-    tooltip = true;
   };
 
   "custom/power" = {

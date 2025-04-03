@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, pkgs-unstable, systemSettings, userSettings, ... }:
+{ config, pkgs, systemSettings, userSettings, ... }:
 
 {
   imports =
@@ -44,10 +44,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # list of stable packages
-    neovim
     wget
     coreutils
-    git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
