@@ -27,7 +27,7 @@
       cursorPkg = pkgs.adwaita-icon-theme;
       cursorSize = 22;
       wm = "hyprland";
-      browser = "";
+      browser = "firefox";
       term = "ghostty";
       shell = "zsh";
       editor = "nvim";

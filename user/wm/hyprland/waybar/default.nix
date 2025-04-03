@@ -7,7 +7,7 @@ let
   waybarConfig = pkgs.writeText "waybar-config.json" (builtins.toJSON {
     layer = "top";
     position = "top";
-    height = 15;
+    height = 30;
     margin = "10";
     spacing = 4;
 
@@ -131,13 +131,13 @@ let
     * {
       font-family: "${userSettings.font}";
       font-size: 13px;
-      border-radius: 10px;
-      padding: 5px;
+      border-radius: 0px;
+      padding: 0px;
       margin: 0px;
     }
 
     #waybar {
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.0);
       color: ${colors.base05};
     }
 

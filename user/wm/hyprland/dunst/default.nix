@@ -1,4 +1,4 @@
-{ config, pkgs, lib, userSettings, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   services.dunst = {
@@ -8,7 +8,7 @@
       global = {
         width = 300;
         height = 100;
-        offset = "10x40";
+        offset = "20x40";
         origin = "top-right";
         transparency = 10;
         frame_width = 2;
@@ -16,6 +16,7 @@
         padding = 8;
         horizontal_padding = 8;
         vertical_padding = 8;
+        corner_radius = 10; 
         word_wrap = true;
         ignore_newline = false;
         show_age_threshold = 60;
@@ -29,7 +30,5 @@
       urgency_critical.timeout = 0;
     };
   };
-
-  home.packages = with pkgs; [ dunst ];
 }
 
