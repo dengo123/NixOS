@@ -7,12 +7,12 @@
     "center, class:gsimplecal"
 
     # 🔊 pavucontrol (Lautstärkeregelung)
-    "float, class:pavucontrol"
-    "center, class:pavucontrol"
+    "float, class:org.pulseaudio.pavucontrol"
+    "center, class:org.pulseaudio.pavucontrol"
 
     # 🔵 blueman-manager (Bluetooth)
-    "float, class:blueman-manager"
-    "center, class:blueman-manager"
+    "float, title:Bluetooth Devices"
+    "center, title:Bluetooth Devices"
 
     # 🌐 nm-connection-editor (Netzwerkverwaltung)
     "float, class:nm-connection-editor"

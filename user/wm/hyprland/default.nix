@@ -6,7 +6,7 @@
     ./hypr
     ./rofi
     ./waybar
-    ./wlogout
+    #    ./wlogout
   ];
 }
 
