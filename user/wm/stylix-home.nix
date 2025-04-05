@@ -37,6 +37,7 @@ in
       package = userSettings.cursorPkg;
       size = userSettings.cursorSize;
     };
+    targets.hyprlock.enable = false;
   };
 }
 

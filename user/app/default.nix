@@ -2,10 +2,11 @@
 
 {
   imports = [
-    ./libreoffice.nix
-    ./virt-home.nix
+    ./libreoffice
+    ./virt
     ./term/${userSettings.term}
     ./browser/${userSettings.browser}
+    ./mail
     ./gc-home.nix
   ];
 }
