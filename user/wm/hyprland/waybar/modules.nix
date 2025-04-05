@@ -3,7 +3,7 @@
 {
   layer = "top";
   position = "top";
-  height = 35;
+  height = 30;
   margin = "10px 5px 0 5px";
   spacing = 3;
 
@@ -14,13 +14,13 @@
 
   "modules-center" = [
     "custom/calendar"
+    "custom/playerctl"
   ];
 
   "modules-right" = [
-    "network"
-    "bluetooth"
     "pulseaudio"
-    "custom/playerctl"
+    "bluetooth"
+    "network"
     "disk"
     "memory"
     "cpu"

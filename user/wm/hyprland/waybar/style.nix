@@ -2,50 +2,88 @@
 let
   colors = lib.importTOML "${themeDir}/colors.toml";
 in ''
-  /* Grundlegender Font */
   * {
-    font-size: 12px;
-    margin: 0px;
-    padding: 0px;
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+    font-family: ${userSettings.font};
   }
 
   #waybar {
-    background-color: rgba(0, 0, 0, 0.0);
-    color: ${colors.base05};
+    background-color: rgba(0, 0, 0, 0.0); /* nur die Bar selbst ist transparent */
+    color: ${colors.base05}; /* Standard-Textfarbe */
+    padding: 0px 4px;
   }
 
-  /* Stil-Einstellungen für Module */
+  /* Modul-Container: links, mitte, rechts */
+  .modules-left, .modules-right, .modules-center {
+    background-color: ${colors.base01}; /* dezenter Hintergrund */
+    border: 2px solid ${colors.base0D};  /* blauer Rahmen */
+    border-radius: 15px;
+    margin: 0 5px;
+    padding: 0 4px;
+  }
+
+  /* Einzelmodule innerhalb der Gruppen */
   #workspaces button,
-  #window,
-  #taskbar,
   #custom-launcher,
-  #custom-browser,
-  #custom-calculator,
-  #custom-mail,
   #custom-power,
   #custom-calendar,
   #custom-playerctl,
-  #custom-brightness,
   #network,
   #bluetooth,
   #pulseaudio,
   #cpu,
   #memory,
   #disk {
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 0 5px 5px 5px;
-    padding: 0 10px 0 10px;
-    border: 2px solid ${colors.base0D};
-    border-radius: 10px;
+    margin: 0 5px;
+    padding: 0 2px;
+    background: transparent;
+    border: none;
   }
 
   #workspaces button.active {
-    background-color: ${colors.base0D};
-    color: ${colors.base00};
+    color: ${colors.base0D};
+  }
+
+  #custom-launcher {
+    color: ${colors.base0E};   
+  }
+    
+  #custom-calendar {
+    color: ${colors.base05}; 
+  }
+
+  #custom-playerctl {
+    color: ${colors.base0F};
   }
 
   #custom-power {
     color: ${colors.base08};
+  }
+
+  #network {
+    color: ${colors.base0C};
+  }
+
+  #bluetooth {
+    color: ${colors.base0D};
+  }
+
+  #pulseaudio {
+    color: ${colors.base0E};
+  }
+
+  #cpu {
+    color: ${colors.base09};
+  }
+
+  #memory {
+    color: ${colors.base0A};
+  }
+
+  #disk {
+    color: ${colors.base0B};
   }
 ''
 
