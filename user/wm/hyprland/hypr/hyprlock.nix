@@ -2,7 +2,8 @@
 
 let
   themeDir = ../../../../themes/${userSettings.theme};
-  colors = lib.importTOML "${themeDir}/colors.toml";
+  rgbaLib = import ../../../../lib/colors-rgba.nix { inherit lib themeDir; };
+  rgba = rgbaLib.rgba 1.0;
 in {
   programs.hyprlock = {
     enable = true;
@@ -17,7 +18,7 @@ in {
         {
           monitor = "";
           path = "${themeDir}/background.png";
-          color = "${colors.base00}";
+          color = "${rgba.base00}";
           blur_size = 3;
           blur_passes = 2;
           noise = 0.0117;
@@ -33,15 +34,12 @@ in {
           monitor = "";
           size = "250, 50";
           outline_thickness = 3;
-          outer_color = colors.base0D;
-          inner_color = colors.base00;
-          font_color = colors.base05;
-
-          # neue Zustände
-          fail_color = colors.base08;
-          capslock_color = colors.base09;
-          check_color = colors.base0B;
-
+          outer_color = "${rgba.base0D}";
+          inner_color = "${rgba.base00}";
+          font_color = "${rgba.base05}";
+          fail_color = "${rgba.base08}";
+          capslock_color = "${rgba.base09}";
+          check_color = "${rgba.base0B}";
           fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
           fade_on_empty = false;
           placeholder_text = "Password...";
@@ -60,7 +58,7 @@ in {
           text = "cmd[update:1000] date +\"%H:%M:%S\"";
           font_size = 64;
           font_family = userSettings.font;
-          color = colors.base0D;
+          color = "${rgba.base0D}";
           position = "0, 16";
           valign = "center";
           halign = "center";
@@ -68,7 +66,7 @@ in {
         {
           monitor = "";
           text = "Welcome, ${userSettings.name}";
-          color = colors.base0D;
+          color = "${rgba.base0D}";
           font_size = 20;
           font_family = userSettings.font;
           position = "0, 100";
