@@ -27,9 +27,10 @@ in ''
   /* Einzelmodule innerhalb der Gruppen */
   #workspaces button,
   #custom-launcher,
-  #custom-power,
-  #custom-calendar,
+  #custom-temperature,
+  #custom-swaync,
   #custom-playerctl,
+  #clock,
   #network,
   #bluetooth,
   #pulseaudio,
@@ -46,20 +47,24 @@ in ''
     color: ${colors.base0D};
   }
 
-  #custom-launcher {
-    color: ${colors.base0E};   
+  #custom-swaync {
+    color: ${colors.base05};
   }
-    
-  #custom-calendar {
-    color: ${colors.base05}; 
+
+  #custom-launcher {
+    color: ${colors.base0E};
+  }
+
+  #custom-temperature {
+    color: ${colors.base08};
+  }
+
+  #clock {
+    color: ${colors.base05};
   }
 
   #custom-playerctl {
     color: ${colors.base0F};
-  }
-
-  #custom-power {
-    color: ${colors.base08};
   }
 
   #network {

@@ -23,11 +23,9 @@ in {
     gsimplecal
     brightnessctl
     playerctl
-    thunderbird
     networkmanagerapplet
-    wlogout
     nerd-fonts.symbols-only
-    # usw.
+    lm_sensors
   ];
 
   # Nun konfigurieren wir Waybar via Home-Manager

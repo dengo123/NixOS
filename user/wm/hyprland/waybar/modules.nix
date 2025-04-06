@@ -1,6 +1,9 @@
 { lib, pkgs, userSettings, ... }:
 
-{
+let
+  themeDir = ../../../../themes/${userSettings.theme};
+  colors = lib.importTOML "${themeDir}/colors.toml";
+in {
   layer = "top";
   position = "top";
   height = 30;
@@ -13,8 +16,7 @@
   ];
 
   "modules-center" = [
-    "custom/calendar"
-    "custom/playerctl"
+    "clock"
   ];
 
   "modules-right" = [
@@ -24,38 +26,63 @@
     "disk"
     "memory"
     "cpu"
-    "custom/power"
+    "custom/temperature"
+    "custom/swaync"
   ];
 
+  ########################
+  # Custom-Module
+  ########################
+
   "custom/launcher" = {
-    format = "󱄅";
+    format = "󱓞";
     tooltip = true;
     "on-click" = "rofi -show drun";
     interval = 0;
   };
 
-  "custom/calendar" = {
-    "exec" = "date +'%a %d.%m %H:%M'";
-    "interval" = 60;
-    "format" = "{}";
-    "on-click" = "gsimplecal";
+  "custom/swaync" = {
+    format = "";
+    tooltip = "Benachrichtigungen";
+    "on-click" = "swaync-client -t -sw";
+    interval = 0;
   };
 
-  "custom/playerctl" = {
-    format = "{status_icon} {title}";
-    format-icons = {
-      playing = "";
-      paused = "";
-      stopped = "";
+  "custom/temperature" = {
+    format = " {}°C";
+    exec = "awk '{printf \"%d\", $1 / 1000}' /sys/class/hwmon/hwmon2/temp1_input";
+    interval = 10;
+    tooltip = true;
+  };
+
+  ########################
+  # Built-in Module
+  ########################
+
+  "clock" = {
+    format = "<span color='${colors.base0A}'>󰃰</span> <span color='${colors.base05}'>{:%H:%M  %d.%m}</span>";
+    tooltip-format = "<tt>{calendar}</tt>";
+    interval = 60;
+    calendar = {
+      mode = "month";
+      format = {
+        months = "<span color='${colors.base0A}'><b>{}</b></span>";
+        weekdays = "<span color='${colors.base0C}'><b>{}</b></span>";
+        today = "<span color='${colors.base08}'><b>{}</b></span>";
+      };
     };
-    exec = "playerctl metadata --format '{{status}} {{title}}'";
-    interval = 5;
   };
 
-  "custom/power" = {
-    format = "⏻";
-    tooltip = "Power Menu";
-    "on-click" = "wlogout";
+  "network" = {
+    format-wifi = " {essid}";
+    format-ethernet = "󰈁 {ipaddr}";
+    format-disconnected = "󱚼";
+    "on-click" = "nm-connection-editor";
+  };
+
+  "bluetooth" = {
+    format = "";
+    "on-click" = "blueman-manager";
   };
 
   "pulseaudio" = {
@@ -63,24 +90,6 @@
     "format-muted" = "";
     "format-icons" = [ "" "" ];
     "on-click" = "pavucontrol";
-  };
-
-  "network" = {
-    "format-wifi" = "{essid}";
-    "format-ethernet" = "󰈁 {ipaddr}";
-    "format-disconnected" = "󱚼";
-    "on-click" = "nm-connection-editor";
-  };
-
-  "bluetooth" = {
-    format = "󰂯";
-    "on-click" = "blueman-manager";
-  };
-
-  "disk" = {
-    format = " {free}";
-    path = "/home";
-    interval = 30;
   };
 
   "memory" = {
@@ -91,6 +100,12 @@
   "cpu" = {
     format = " {usage}%";
     interval = 5;
+  };
+
+  "disk" = {
+    format = " {free}";
+    path = "/home";
+    interval = 30;
   };
 }
 

@@ -1,7 +1,7 @@
 { config, pkgs, lib, userSettings, ... }:
 
 let
-  themeDir = ../../../../../themes/${userSettings.theme};
+  themeDir = ../../../../themes/${userSettings.theme};
   colors = lib.importTOML "${themeDir}/colors.toml";
 in {
   home.packages = [ pkgs.swaynotificationcenter ];

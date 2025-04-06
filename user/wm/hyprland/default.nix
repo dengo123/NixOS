@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./dunst
+    ./swaync
     ./hypr
     ./rofi
     ./waybar
