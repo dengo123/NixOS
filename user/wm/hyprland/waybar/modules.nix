@@ -42,17 +42,18 @@ in {
   };
 
   "custom/swaync" = {
-    format = "{} <span color='${colors.base05}'></span>";
-    return-type = "text";
-    interval = 5;
     exec = ''
-      if [ "$(swaync-client -D)" = "true" ]; then
-        echo "<span color='${colors.base08}'></span>"
+      if swaync-client -D | grep -q true; then
+        echo -n '{"text": "", "tooltip": "Do Not Disturb", "class": "dnd-active"}'
       else
-        echo "<span color='${colors.base0A}'></span>"
+        echo -n '{"text": "", "tooltip": "", "class": "dnd-inactive"}'
       fi
     '';
+    return-type = "json";
+    format = "{} ";
+    interval = 2;
     on-click = "swaync-client -t -sw";
+    escape = true;
   };
 
   "custom/temperature" = {

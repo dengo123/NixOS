@@ -4,7 +4,13 @@ let
   themeDir = ../../../../themes/${userSettings.theme};
   colors = lib.importTOML "${themeDir}/colors.toml";
 in {
-  home.packages = [ pkgs.swaynotificationcenter ];
+  home.packages = with pkgs; [ 
+    swaynotificationcenter 
+    wlsunset
+    grimblast
+    swappy
+  ];
+
 
   services.swaync = {
     enable = true;
