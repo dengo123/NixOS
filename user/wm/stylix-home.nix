@@ -37,8 +37,12 @@ in
       package = userSettings.cursorPkg;
       size = userSettings.cursorSize;
     };
-    targets.hyprlock.enable = false;
-    targets.swaync.enable = false;
+    targets = {
+      hyprlock.enable = false;
+      swaync.enable = false;
+      ghostty.enable = false;
+      firefox.profileNames = [ "default" ];
+    };
   };
 }
 

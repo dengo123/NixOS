@@ -17,8 +17,8 @@ in ''
 
   /* Modul-Container: links, mitte, rechts */
   .modules-left, .modules-right, .modules-center {
-    background-color: ${colors.base01}; /* dezenter Hintergrund */
-    border: 2px solid ${colors.base05};  /* blauer Rahmen */
+    background-color: ${colors.base01};
+    border: 2px solid ${colors.base04};  
     border-radius: 16px;
     margin: 0 5px;
     padding: 2px;
