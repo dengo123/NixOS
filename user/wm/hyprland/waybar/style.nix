@@ -3,7 +3,7 @@ let
   colors = lib.importTOML "${themeDir}/colors.toml";
 in ''
   * {
-    font-size: 11px;
+    font-size: 15px;
     margin: 0;
     padding: 0;
     font-family: ${userSettings.font};
@@ -18,10 +18,10 @@ in ''
   /* Modul-Container: links, mitte, rechts */
   .modules-left, .modules-right, .modules-center {
     background-color: ${colors.base01}; /* dezenter Hintergrund */
-    border: 2px solid ${colors.base0D};  /* blauer Rahmen */
-    border-radius: 15px;
+    border: 2px solid ${colors.base05};  /* blauer Rahmen */
+    border-radius: 16px;
     margin: 0 5px;
-    padding: 0 4px;
+    padding: 2px;
   }
 
   /* Einzelmodule innerhalb der Gruppen */
@@ -29,6 +29,7 @@ in ''
   #custom-launcher,
   #custom-temperature,
   #custom-swaync,
+  #custom-window
   #custom-playerctl,
   #clock,
   #network,
@@ -38,7 +39,7 @@ in ''
   #memory,
   #disk {
     margin: 0 5px;
-    padding: 0 2px;
+    padding: 0 5px;
     background: transparent;
     border: none;
   }

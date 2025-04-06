@@ -6,13 +6,14 @@ let
 in {
   layer = "top";
   position = "top";
-  height = 30;
+  height = 32;
   margin = "10px 5px 0 5px";
   spacing = 3;
 
   "modules-left" = [
     "custom/launcher"
     "hyprland/workspaces"
+    "custom/window"
   ];
 
   "modules-center" = [
@@ -54,6 +55,13 @@ in {
     interval = 2;
     on-click = "swaync-client -t -sw";
     escape = true;
+  };
+
+  "custom/window" = {
+    format = "{}";
+    exec = "~/.dotfiles/NixOS/user/wm/hyprland/waybar/scripts/window-title.sh";
+    interval = 1;
+    tooltip = false;
   };
 
   "custom/temperature" = {

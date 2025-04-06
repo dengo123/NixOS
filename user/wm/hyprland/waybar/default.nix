@@ -26,6 +26,7 @@ in {
     networkmanagerapplet
     nerd-fonts.symbols-only
     lm_sensors
+    psmisc
   ];
 
   # Nun konfigurieren wir Waybar via Home-Manager
