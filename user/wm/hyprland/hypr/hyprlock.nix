@@ -58,7 +58,7 @@ in {
           text = "cmd[update:1000] date +\"%H:%M:%S\"";
           font_size = 64;
           font_family = userSettings.font;
-          color = "${rgba.base0D}";
+          color = "${rgba.base05}";
           position = "0, 16";
           valign = "center";
           halign = "center";
@@ -66,7 +66,7 @@ in {
         {
           monitor = "";
           text = "Welcome, ${userSettings.name}";
-          color = "${rgba.base0D}";
+          color = "${rgba.base05}";
           font_size = 20;
           font_family = userSettings.font;
           position = "0, 100";

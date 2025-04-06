@@ -38,6 +38,7 @@ in
       size = userSettings.cursorSize;
     };
     targets.hyprlock.enable = false;
+    targets.swaync.enable = false;
   };
 }
 

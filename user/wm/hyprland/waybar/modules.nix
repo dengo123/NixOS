@@ -42,10 +42,17 @@ in {
   };
 
   "custom/swaync" = {
-    format = "";
-    tooltip = "Benachrichtigungen";
-    "on-click" = "swaync-client -t -sw";
-    interval = 0;
+    format = "{} <span color='${colors.base05}'></span>";
+    return-type = "text";
+    interval = 5;
+    exec = ''
+      if [ "$(swaync-client -D)" = "true" ]; then
+        echo "<span color='${colors.base08}'></span>"
+      else
+        echo "<span color='${colors.base0A}'></span>"
+      fi
+    '';
+    on-click = "swaync-client -t -sw";
   };
 
   "custom/temperature" = {
@@ -62,6 +69,7 @@ in {
   "clock" = {
     format = "<span color='${colors.base0A}'>󰃰</span> <span color='${colors.base05}'>{:%H:%M  %d.%m}</span>";
     tooltip-format = "<tt>{calendar}</tt>";
+    "on-click" = "gsimplecal";
     interval = 60;
     calendar = {
       mode = "month";
