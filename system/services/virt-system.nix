@@ -39,7 +39,6 @@
 
     # CLI-Tools
     virt-top         # Ressourcenüberwachung
-    virt-xml         # VM-Konfig anpassen
 
     # Diagnose-Tools
     dmidecode
