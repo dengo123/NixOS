@@ -5,6 +5,7 @@
     bind = [
       # ── Programme ─────────────────────────────────────
       "SUPER, RETURN, exec, ${userSettings.term}"
+      "SUPER, Y, exec, ${userSettings.term} -e yazi"
       "SUPER, Q, killactive"
       "SUPER, SHIFT+Q, exit"
       "SUPER, E, exec, dolphin"
@@ -22,6 +23,13 @@
       "SUPER_SHIFT, RIGHT, movewindow, r"
       "SUPER_SHIFT, UP, movewindow, u"
       "SUPER_SHIFT, DOWN, movewindow, d"
+
+      # ── Fenster minimieren ───────────────────────────────
+      "SUPER, S, togglespecialworkspace, magic"
+      "SUPER, S, movetoworkspace, +0"
+      "SUPER, S, togglespecialworkspace, magic"
+      "SUPER, S, movetoworkspace, special:magic"
+      "SUPER, S, togglespecialworkspace, magic"
 
       # ── Fenster rotieren ───────────────────────────────────
       "SUPER, R, layoutmsg, cyclenext"
