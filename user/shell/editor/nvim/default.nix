@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ ... }:
 
 {
   programs.nixvim = { 
@@ -7,5 +7,8 @@
     
   };
   imports = import ./plugins;
+
+  home.file.".config/nvim/doc/nixvim.txt".source =
+    ./nixvim.txt;
 }
 

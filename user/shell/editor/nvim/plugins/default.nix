@@ -1,13 +1,15 @@
 [
-  ./vim-options.nix
-  ./cmp.nix
-  ./dap.nix
-  ./lsp.nix
-  ./neotree.nix
-  ./none-ls.nix
-  ./treesitter.nix
-  ./telescope.nix
-  ./ui.nix
-  ./alpha.nix
+  ./alpha
+  ./cmp
+  ./dap
+  ./diagnostics
+  ./lsp
+  #  ./mini
+  ./neotree
+  ./none-ls
+  ./telescope
+  ./treesitter
+  ./ui
+  ./vim-options
 ]
 
