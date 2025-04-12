@@ -1,10 +1,9 @@
-{ userSettings, ... }@args:
-{
+{userSettings, ...}: {
   imports = [
     ./cli.nix
     ./dev-tools.nix
     ./git.nix
-    ./${userSettings.shell}/${userSettings.shell + ".nix"}
+    ./${userSettings.shell}
     ./editor/${userSettings.editor}
     ./rice
     ./yazi

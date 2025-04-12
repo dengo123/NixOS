@@ -1,8 +1,6 @@
-{ ... }:
-
-{
+{...}: {
   imports = [
     ./rice.nix
-    ./fastfetch.nix
+    # ./fastfetch.nix
   ];
 }

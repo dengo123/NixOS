@@ -1,8 +1,7 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     #Fancies
+    fastfetch
     btop
     pipes
     peaclock
@@ -15,4 +14,3 @@
     sl
   ];
 }
-
