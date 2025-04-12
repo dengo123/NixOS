@@ -1,101 +1,118 @@
-*nixvim.txt*    Spickzettel für deine Nixvim-Config
+*nixvim.txt*    Spickzettel für deine Nixvim-Config (erweitert)
 
-Nixvim – Modulübersicht & Keymaps
-=================================
+Nixvim – Modulübersicht, Plugins, Funktionen und Keymaps
+=========================================================
+
+Dieses Dokument listet alle aktiven Module, Plugins und Tastenkürzel deiner Nixvim-Konfiguration
+auf – ergänzt mit kurzen Erklärungen zur Funktion jedes Plugins. 
+Öffne diese Datei in Neovim mit :help nixvim
 
 STRUKTUR
 --------
 
-| Bereich            | Modulpfad                                        |
-|--------------------|--------------------------------------------------|
-| LSP                | plugins/lsp.nix                                  |
-| DAP                | plugins/dap.nix                                  |
-| CMP (Autocomplete) | plugins/cmp.nix                                  |
-| Treesitter         | plugins/treesitter.nix                           |
-| UI (Statusleiste)  | plugins/ui.nix                                   |
-| Diagnostics        | plugins/diagnostics.nix                          |
-| Mini Plugins       | plugins/mini.nix                                 |
-| Vim Options        | plugins/vim-options.nix                          |
+| Bereich            | Modulpfad                  |
+|--------------------|----------------------------|
+| LSP                | plugins/lsp.nix            |
+| DAP                | plugins/dap.nix            |
+| CMP                | plugins/cmp.nix            |
+| Treesitter         | plugins/treesitter.nix     |
+| Mini Plugins       | plugins/mini.nix           |
+| UI                 | plugins/ui.nix             |
+| Diagnostics        | plugins/diagnostics.nix    |
+| Vim Options        | plugins/vim-options.nix    |
+
+MODULE & PLUGINS
+================
 
 LSP (plugins/lsp.nix)
 ---------------------
-- `nvim-lspconfig`
-- Sprachserver: lua_ls, ts_ls, pyright, nixd, bashls
+- Plugin: nvim-lspconfig
+  → Ermöglicht LSP-Features wie Autocomplete, Jump-to-Definition, Rename, Formatierung etc.
 
 Keymaps:
-  <leader>ld   - LSP: Definition springen
-  <leader>lr   - LSP: Rename
-  <leader>lf   - LSP: Formatieren
+  <leader>ld     Springe zur Definition
+  <leader>lr     Rename
+  <leader>lf     Formatieren
 
 DAP (plugins/dap.nix)
 ---------------------
-- `nvim-dap`, `nvim-dap-ui`
+- Plugin: nvim-dap + nvim-dap-ui
+  → Ermöglicht Debugging in Neovim (Breakpoints, Step Over, Continue etc.)
 
 Keymaps:
-  <leader>dt   - Breakpoint togglen
-  <leader>dc   - Continue
-  <leader>du   - DAP UI togglen
+  <leader>dt     Toggle Breakpoint
+  <leader>dc     Continue
+  <leader>du     DAP UI umschalten
 
 CMP (plugins/cmp.nix)
 ---------------------
-- `nvim-cmp`, `luasnip`, `cmp-nvim-lsp`, `lspkind`
+- Plugin: nvim-cmp + luasnip + lspkind
+  → Autovervollständigung mit Snippets, LSP-Integration & Icon-Anzeige
 
 Keymaps:
-  <Tab>        - Nächster Vorschlag
-  <S-Tab>      - Vorheriger Vorschlag
-  <CR>         - Vorschlag übernehmen
+  <Tab> / <S-Tab>   Vorschläge durchblättern
+  <CR>              Vorschlag übernehmen
 
 Treesitter (plugins/treesitter.nix)
 -----------------------------------
-- `nvim-treesitter`, `textobjects`, `playground`, `context`, `mini.*`
+- Plugins: nvim-treesitter, textobjects, playground, context
+  → Syntax-Highlighting, Bewegungen, Peek, Swap etc. auf Syntaxbasis
 
 Keymaps:
-  <leader>tt   - Playground toggle
-  <leader>tp   - Peek Definition
-  <leader>ta   - Swap Argument (vorwärts)
-  <leader>tA   - Swap Argument (rückwärts)
-  <leader>tf   - Fold toggle
-  <leader>th   - Highlight Capture unter Cursor
-  [f / ]f      - Zu vorheriger/nächster Funktion
-  [c / ]c      - Zu vorheriger/nächster Klasse
+  <leader>tt     Playground anzeigen
+  <leader>tp     Definition peeken
+  <leader>ta/A   Parameter tauschen
+  [f/c/a]        Springen zu Funktions-/Klassen-/Parameterstart
+  <leader>tC     Context anzeigen/ausblenden
 
-Mini Plugins (plugins/mini.nix)
--------------------------------
-- `mini.surround`, `comment`, `ai`, `jump`, `move`, `bufremove`, `indentscope`, `bracketed`, `trailspace`
+Mini (plugins/mini.nix)
+-----------------------
+- Sammlung minimaler Lua-Plugins:
+  - surround: Quotes, Tags, Brackets manipulieren
+  - comment: Code kommentieren
+  - ai: smarte Textobjekte
+  - jump: extrem schnelles Springen
+  - move: Text mit <M-hjkl> verschieben
+  - trailspace: Leerzeichen entfernen
+  - bufremove: Buffer schließen ohne Fenster zu zerstören
+  - indentscope: animierte Einrückungsanzeige
+  - bracketed: [b], [q], [d] Navigation
 
-Beispiele:
-  ysiw'        - Word mit ' umschließen
-  gcc          - Zeile kommentieren
-  <M-h/j/k/l>  - Zeilen/Bereiche verschieben
+Keymaps:
+  ysiw', ds", cs"'     Surround
+  gcc, gc              Kommentieren
+  <M-h/j/k/l>          Verschieben
 
 UI (plugins/ui.nix)
 -------------------
-- `lualine.nvim`, `web-devicons`
-- `number`, `relativenumber`, Transparenz über highlight + Stylix
+- lualine.nvim: Modulare, stylische Statusleiste
+- web-devicons: Datei-Icons für Tree, Statusleisten etc.
+- Optionen: number, relativenumber, Transparenz über highlight + Stylix
 
 Diagnostics (plugins/diagnostics.nix)
 -------------------------------------
-- `trouble.nvim`, `gitsigns.nvim`, `noice.nvim`
+- trouble.nvim: zeigt Fehler, Warnungen und LSP-Meldungen übersichtlich
+- gitsigns.nvim: zeigt +/– Zeichen im Gutter (Git-Diff)
+- noice.nvim: ersetzt echo, :messages & cmdline UI
 
 Keymaps:
-  gl           - Fehler anzeigen (float)
-  [d / ]d      - Diagnose vor/zurück
-  <leader>td   - Trouble diagnostics
-  <leader>tq   - Trouble quickfix
-  <leader>tl   - Trouble location list
+  gl           Aktuelle Meldung als Popup anzeigen
+  [d / ]d      Vorherige/nächste Diagnose
+  <leader>td   Diagnostics (Trouble)
+  <leader>tq   Quickfix
+  <leader>tl   Location-List
 
 Vim Optionen (plugins/vim-options.nix)
---------------------------------------
-  expandtab = true
-  tabstop = 2
-  softtabstop = 2
-  shiftwidth = 2
+-------------------------------------
+- Tabbreite: 2
+- Tabs als Spaces (`expandtab`)
+- Fenster-Navigation: <C-h/j/k/l>
+- Tab-Navigation: <C-t/n/b/w>
 
-Fenster & Tabs:
-  <C-h/j/k/l>  - Fenster wechseln
-  <C-t>        - Neuer Tab
-  <C-n/b/w>    - Tab vor/zurück/schließen
+TIPP
+====
 
-TIPP: Diese Datei nach ~/.config/nvim/doc/nixvim.txt verlinken und
-:helptags ~/.config/nvim/doc ausführen, dann mit :help nixvim anzeigen.
+1. Linke diese Datei nach ~/.config/nvim/doc/nixvim.txt
+2. Führe dann :helptags ~/.config/nvim/doc aus
+3. Rufe jederzeit mit :help nixvim diesen Spickzettel auf
 
