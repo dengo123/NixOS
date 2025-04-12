@@ -1,6 +1,4 @@
-{ config, lib, pkgs, ... }:
-
-{
+{...}: {
   programs.nixvim.plugins = {
     lsp = {
       enable = true;
@@ -10,7 +8,7 @@
         pyright.enable = true;
         ts_ls.enable = true;
         html.enable = true;
-        nixd.enable = true; # statt "nil"
+        nil_ls.enable = true;
       };
     };
   };
@@ -54,4 +52,3 @@
     }
   ];
 }
-

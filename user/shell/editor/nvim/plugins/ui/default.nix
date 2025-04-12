@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  #  imports = [ ./extra.nix ];
+  # imports = [ ./colors.nix];
 
   programs.nixvim.config = {
     enable = true;

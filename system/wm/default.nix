@@ -1,4 +1,4 @@
-{ userSettings, ... }@args:
+{ userSettings, ... }:
 
 {
   imports = [

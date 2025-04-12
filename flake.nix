@@ -1,7 +1,7 @@
 {
   description = "The Ultimate Flake";
 
-  outputs = inputs@{ self, nixpkgs, home-manager, cosmic, ghostty, stylix, nixvim, hyprland, hyprland-plugins, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, ghostty, stylix, nixvim, hyprland, hyprland-plugins, ... }:
   let
     system = "x86_64-linux";
 
@@ -16,7 +16,7 @@
     };
 
     # ----- USER SETTINGS ----- #
-    userSettings = rec {
+    userSettings = {
       username = "dengo123";
       name = "Deniz";
       email = "deniz060198@hotmail.com";
@@ -34,7 +34,7 @@
     };
 
     # ----- PACKAGES ----- #
-    overlays = [ cosmic.overlay ];
+    overlays = [];
     lib = nixpkgs.lib;
 
     pkgs = import inputs.nixpkgs {
@@ -45,10 +45,11 @@
       };
     };
 
-    specialArgs = if userSettings.wm == "cosmic" then
-      { inherit systemSettings userSettings inputs stylix; }
-    else
-      { inherit systemSettings userSettings inputs pkgs stylix; };
+    theme = lib.importTOML ./themes/${userSettings.theme}/colors.toml;
+
+    specialArgs = {
+      inherit systemSettings userSettings inputs pkgs stylix theme;
+    };
 
   in {
     nixosConfigurations = {
@@ -56,24 +57,16 @@
         system = systemSettings.system;
         modules = [
           ./profiles/${systemSettings.profile}/configuration.nix
-          cosmic.nixosModules.default
-          {
-            nix.settings = {
-              substituters = [ "https://cosmic.cachix.org/" ];
-              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-            };
-          }
         ];
         specialArgs = specialArgs;
       };
     };
 
     homeConfigurations = {
-      user = home-manager.lib.homeManagerConfiguration {
+      user = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./profiles/${systemSettings.profile}/home.nix
-          nixvim.homeManagerModules.nixvim
         ];
         extraSpecialArgs = specialArgs;
       };
@@ -89,14 +82,12 @@
     };
 
     ghostty.url = "github:ghostty-org/ghostty";
-    
-    cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     nixvim.url = "github:nix-community/nixvim";
 
     hyprland.url = "github:hyprwm/Hyprland";
@@ -105,6 +96,5 @@
       inputs.hyprland.follows = "hyprland";
     };
   };
-
 }
 

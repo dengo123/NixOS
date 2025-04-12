@@ -1,7 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
-  # Enable Cosmic Desktop
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
 
@@ -34,5 +33,4 @@
     cosmic-screenshot
     quick-webapps
   ];
-
 }

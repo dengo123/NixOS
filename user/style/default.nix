@@ -1,17 +1,22 @@
-{ inputs, config, lib, pkgs, userSettings, ... }:
+{ inputs, lib, pkgs, userSettings, ... }:
 
 let
   themeDir = ../../themes/${userSettings.theme};
   importedColors = lib.importTOML "${themeDir}/colors.toml";
 in
 {
-  imports = [ inputs.stylix.homeManagerModules.stylix ];
+  imports = [ 
+    inputs.stylix.homeManagerModules.stylix 
+    ./nixvim
+  ];
 
   stylix = {
     enable = true;
     image = "${themeDir}/background.png";
     polarity = "dark";
     base16Scheme = importedColors;
+
+    opacity.terminal = 0.8;
 
     fonts = {
       monospace = {

@@ -1,4 +1,4 @@
-{ config, userSettings, ... }:
+{ userSettings, ... }:
 
 {
   users.users.${userSettings.username} = {

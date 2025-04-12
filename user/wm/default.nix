@@ -1,4 +1,4 @@
-{ config, pkgs, lib, userSettings, ... }:
+{ userSettings, ... }:
 let
   wmModule =
     if userSettings.wm == "cosmic"
@@ -6,8 +6,6 @@ let
     else [ ./${userSettings.wm} ];
 in 
 {
-  imports = wmModule ++ [
-    ./stylix-home.nix
-  ];
+  imports = wmModule;
 }
 

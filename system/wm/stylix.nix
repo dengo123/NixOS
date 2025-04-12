@@ -1,27 +1,18 @@
-{ config, pkgs, lib, userSettings, inputs, ... }:
+{ lib, userSettings, inputs, ... }:
 
 let
   themeDir = ../../themes/${userSettings.theme};
-  wallpaperPath =
-    if builtins.pathExists "${themeDir}/background.png"
-    then "${themeDir}/background.png"
-    else ../../themes/wallpapers/${userSettings.wallpaper}.png;
-
-  hasColorsToml = builtins.pathExists "${themeDir}/colors.toml";
-  importedColorsPath = "${themeDir}/colors.toml";
-
-  tomlGenerator = pkgs.formats.toml { };
+  importedColors = lib.importTOML "${themeDir}/colors.toml";
 in
 {
   imports = [ inputs.stylix.nixosModules.stylix ];
 
   stylix = {
     enable = true;
-
-    image = wallpaperPath;
+    image = "${themeDir}/background.png";
     polarity = "dark";
 
-    base16Scheme = lib.mkIf hasColorsToml (lib.importTOML importedColorsPath);
+    base16Scheme = importedColors;
 
     fonts.monospace = {
       package = userSettings.fontPkg;

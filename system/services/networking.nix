@@ -1,7 +1,6 @@
-{ config, systemSettings, ... }:
+{ systemSettings, ... }:
 
 {
-
   networking.hostName = systemSettings.hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -17,5 +16,4 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
 }

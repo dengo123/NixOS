@@ -1,11 +1,8 @@
-{ config, systemSettings, ... }:
+{ systemSettings, ... }:
 
 {
-
-  # Set your time zone.
   time.timeZone = systemSettings.timezone;
 
-  # Select internationalisation properties.
   i18n.defaultLocale = systemSettings.locale;
 
   i18n.extraLocaleSettings = {
@@ -19,5 +16,4 @@
     LC_TELEPHONE = systemSettings.locale;
     LC_TIME = systemSettings.locale;
   };
-
 }
