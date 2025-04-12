@@ -1,11 +1,13 @@
-{ lib, userSettings, inputs, ... }:
-
-let
+{
+  lib,
+  userSettings,
+  inputs,
+  ...
+}: let
   themeDir = ../../themes/${userSettings.theme};
   importedColors = lib.importTOML "${themeDir}/colors.toml";
-in
-{
-  imports = [ inputs.stylix.nixosModules.stylix ];
+in {
+  imports = [inputs.stylix.nixosModules.stylix];
 
   stylix = {
     enable = true;
@@ -22,8 +24,7 @@ in
     cursor = {
       name = userSettings.cursor;
       package = userSettings.cursorPkg;
-      size = userSettings.cursorSize;
+      size = 22;
     };
   };
 }
-

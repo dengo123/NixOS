@@ -1,9 +1,9 @@
-{ pkgs, lib, userSettings, ... }:
-
-let
-  themeDir = ../../../../themes/${userSettings.theme};
-  colors = lib.importTOML "${themeDir}/colors.toml";
-in {
+{
+  pkgs,
+  userSettings,
+  theme,
+  ...
+}: {
   programs.ghostty = {
     enable = true;
     package = pkgs.ghostty;
@@ -12,13 +12,13 @@ in {
       font-size = 12;
       font-family = userSettings.font;
 
-      background = colors.base01;
+      background-opacity = 0.8;
+      background = theme.base01;
 
-      foreground = colors.base05;
-      cursor-color = colors.base05;
+      foreground = theme.base05;
+      cursor-color = theme.base05;
     };
 
     enableZshIntegration = true;
   };
 }
-

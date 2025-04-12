@@ -1,16 +1,15 @@
-{ pkgs, ... }:
-
-{
-	home.packages = with pkgs; [
-		deadnix
-		alejandra
-		statix
-		nodejs
-		cargo
+{pkgs, ...}: {
+  home.packages = with pkgs; [
+    deadnix
+    alejandra
+    statix
+    nodejs
+    cargo
     pipx
-		jq
+    jq
     lua5_4
     gcc
     python3
-	];
+    poetry
+  ];
 }

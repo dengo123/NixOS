@@ -1,10 +1,7 @@
-{ userSettings, ... }:
-
-{
+{...}: {
   imports = [
-    ./${userSettings.wm + ".nix"}
+    ./hyprland.nix
     ./xdg-portal.nix
     ./stylix.nix
   ];
 }
-

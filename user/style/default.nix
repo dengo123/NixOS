@@ -1,12 +1,15 @@
-{ inputs, lib, pkgs, userSettings, ... }:
-
-let
+{
+  inputs,
+  lib,
+  pkgs,
+  userSettings,
+  ...
+}: let
   themeDir = ../../themes/${userSettings.theme};
   importedColors = lib.importTOML "${themeDir}/colors.toml";
-in
-{
-  imports = [ 
-    inputs.stylix.homeManagerModules.stylix 
+in {
+  imports = [
+    inputs.stylix.homeManagerModules.stylix
     ./nixvim
   ];
 
@@ -40,14 +43,13 @@ in
     cursor = {
       name = userSettings.cursor;
       package = userSettings.cursorPkg;
-      size = userSettings.cursorSize;
+      size = 22;
     };
     targets = {
       hyprlock.enable = false;
       swaync.enable = false;
       ghostty.enable = false;
-      firefox.profileNames = [ "default" ];
+      firefox.profileNames = ["default"];
     };
   };
 }
-
