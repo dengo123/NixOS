@@ -1,8 +1,16 @@
 {
   description = "The Ultimate Flake";
 
-  outputs = inputs@{ nixpkgs, home-manager, ghostty, stylix, nixvim, hyprland, hyprland-plugins, ... }:
-  let
+  outputs = inputs @ {
+    nixpkgs,
+    home-manager,
+    ghostty,
+    stylix,
+    nixvim,
+    hyprland,
+    hyprland-plugins,
+    ...
+  }: let
     system = "x86_64-linux";
 
     # ---- SYSTEM SETTINGS ---- #
@@ -50,7 +58,6 @@
     specialArgs = {
       inherit systemSettings userSettings inputs pkgs stylix theme;
     };
-
   in {
     nixosConfigurations = {
       system = lib.nixosSystem {
@@ -97,4 +104,3 @@
     };
   };
 }
-
